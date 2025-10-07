@@ -1,0 +1,14 @@
+
+file_format: "1"
+id: tstk_tl6tn9
+name: tstk_tl6tn9
+type: shield
+features:
+  - keys
+  - studio
+outputs:
+  - usb
+  - ble
+siblings:
+  - tstk_tl6tn9_left
+  - tstk_tl6tn9_right

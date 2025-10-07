@@ -1,0 +1,2702 @@
+{
+    "layout": {
+        "isSplit": true,
+        "switchType": "mx-19",
+        "keyboardName": "TSTK-TL6TN9",
+        "minStabilizer": 2,
+        "controllerType": "wireless",
+        "leftData": {
+            "schemeVersion": "1.3",
+            "modules": {
+                "switch-00-00": {
+                    "x": 1,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-00-01": {
+                    "x": 2,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 1,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-00-02": {
+                    "x": 3,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 2,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-00-03": {
+                    "x": 4,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 3,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-00-04": {
+                    "x": 5,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 4,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-00-05": {
+                    "x": 6,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 5,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-00-06": {
+                    "x": 7,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 6,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-00-07": {
+                    "x": 7,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-08": {
+                    "x": 8,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-09": {
+                    "x": 9,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-10": {
+                    "x": 10,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-11": {
+                    "x": 11,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-12": {
+                    "x": 12,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-00": {
+                    "x": 1.25,
+                    "y": 1.25,
+                    "a": 0,
+                    "width": 1.5,
+                    "height": 1,
+                    "row": 1,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-01-01": {
+                    "x": 2.5,
+                    "y": 1.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 1,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-01-02": {
+                    "x": 3.5,
+                    "y": 1.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 2,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-01-03": {
+                    "x": 4.5,
+                    "y": 1.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 3,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-01-04": {
+                    "x": 5.5,
+                    "y": 1.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 4,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-01-05": {
+                    "x": 6.5,
+                    "y": 1.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 5,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-01-06": {
+                    "x": 7,
+                    "y": 1.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 6,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-01-07": {
+                    "x": 7,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-08": {
+                    "x": 8,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-09": {
+                    "x": 9,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-10": {
+                    "x": 10,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-11": {
+                    "x": 11,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-12": {
+                    "x": 12,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-00": {
+                    "x": 1.375,
+                    "y": 2.25,
+                    "a": 0,
+                    "width": 1.75,
+                    "height": 1,
+                    "row": 2,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-02-01": {
+                    "x": 2.75,
+                    "y": 2.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 1,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-02-02": {
+                    "x": 3.75,
+                    "y": 2.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 2,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-02-03": {
+                    "x": 4.75,
+                    "y": 2.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 3,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-02-04": {
+                    "x": 5.75,
+                    "y": 2.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 4,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-02-05": {
+                    "x": 6.75,
+                    "y": 2.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 5,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-02-06": {
+                    "x": 7,
+                    "y": 2.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 6,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-02-07": {
+                    "x": 7,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-08": {
+                    "x": 8,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-09": {
+                    "x": 9,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-10": {
+                    "x": 10,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-11": {
+                    "x": 11,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-12": {
+                    "x": 12,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-00": {
+                    "x": 1.875,
+                    "y": 3.25,
+                    "a": 0,
+                    "width": 1.75,
+                    "height": 1,
+                    "row": 3,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-03-01": {
+                    "x": 3.25,
+                    "y": 3.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 1,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-03-02": {
+                    "x": 4.25,
+                    "y": 3.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 2,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-03-03": {
+                    "x": 5.25,
+                    "y": 3.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 3,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-03-04": {
+                    "x": 6.25,
+                    "y": 3.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 4,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-03-05": {
+                    "x": 7.25,
+                    "y": 3.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 5,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-03-06": {
+                    "x": 6,
+                    "y": 3.75,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 6,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-03-07": {
+                    "x": 7,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-08": {
+                    "x": 8,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-09": {
+                    "x": 9,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-10": {
+                    "x": 10,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-11": {
+                    "x": 11,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-12": {
+                    "x": 12,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-00": {
+                    "x": 1,
+                    "y": 4.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 0,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-04-01": {
+                    "x": 1.75,
+                    "y": 4.25,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 1,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-04-02": {
+                    "x": 3,
+                    "y": 4.25,
+                    "a": 0,
+                    "width": 1.5,
+                    "height": 1,
+                    "row": 4,
+                    "col": 2,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-04-03": {
+                    "x": 4.25,
+                    "y": 4.375,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 3,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": "choc2"
+                },
+                "switch-04-04": {
+                    "x": 5.375,
+                    "y": 4.5,
+                    "a": 15,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 4,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": "choc2"
+                },
+                "switch-04-05": {
+                    "x": 6.386987298107779,
+                    "y": 4.839999999999998,
+                    "a": 22,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 5,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": "choc2"
+                },
+                "switch-04-06": {
+                    "x": 7.348012701892219,
+                    "y": 5.309999999999999,
+                    "a": 30,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 6,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": "choc2"
+                },
+                "switch-04-07": {
+                    "x": 7,
+                    "y": 4,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-08": {
+                    "x": 8,
+                    "y": 4,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-09": {
+                    "x": 9,
+                    "y": 4,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-10": {
+                    "x": 10,
+                    "y": 4,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-11": {
+                    "x": 11,
+                    "y": 4,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-12": {
+                    "x": 12,
+                    "y": 4,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-00": {
+                    "x": 0,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 0,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-01": {
+                    "x": 1,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 1,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-02": {
+                    "x": 2,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 2,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-03": {
+                    "x": 3,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 3,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-04": {
+                    "x": 4,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 4,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-05": {
+                    "x": 5,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 5,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-06": {
+                    "x": 6,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 6,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-07": {
+                    "x": 7,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-08": {
+                    "x": 8,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-09": {
+                    "x": 9,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-10": {
+                    "x": 10,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-11": {
+                    "x": 11,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-12": {
+                    "x": 12,
+                    "y": 5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "controller": {
+                    "x": 4,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 0,
+                    "height": 1,
+                    "row": 6,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "controller",
+                    "variant": "side-2"
+                },
+                "encoder": {
+                    "x": 0,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 1,
+                    "enabled": false,
+                    "moduleType": "encoder"
+                },
+                "trackball": {
+                    "x": 0,
+                    "y": 0,
+                    "a": 0,
+                    "width": 2,
+                    "height": 2,
+                    "row": 6,
+                    "col": 2,
+                    "enabled": false,
+                    "moduleType": "trackball"
+                },
+                "trackpad": {
+                    "x": 0,
+                    "y": 0,
+                    "a": 0,
+                    "width": 2,
+                    "height": 2,
+                    "row": 5,
+                    "col": 3,
+                    "enabled": false,
+                    "moduleType": "trackpad",
+                    "variant": "circle-30"
+                },
+                "switch-00-13": {
+                    "x": 13,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 13,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-01-13": {
+                    "x": 13,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 13,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-02-13": {
+                    "x": 13,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 13,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-00-14": {
+                    "x": 14,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 14,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-01-14": {
+                    "x": 14,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 14,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-02-14": {
+                    "x": 14,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 14,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-03-13": {
+                    "x": 13,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 13,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-00-15": {
+                    "x": 15,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 15,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-00-16": {
+                    "x": 16,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 16,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-03-14": {
+                    "x": 14,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 14,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-01-15": {
+                    "x": 15,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 15,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-02-15": {
+                    "x": 15,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 15,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-03-15": {
+                    "x": 15,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 15,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-01-16": {
+                    "x": 16,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 16,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-02-16": {
+                    "x": 16,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 16,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-03-16": {
+                    "x": 16,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 16,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-00-17": {
+                    "x": 17,
+                    "y": 0,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 17,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-01-17": {
+                    "x": 17,
+                    "y": 1,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 17,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-02-17": {
+                    "x": 17,
+                    "y": 2,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 17,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-03-17": {
+                    "x": 17,
+                    "y": 3,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 17,
+                    "enabled": false,
+                    "moduleType": "switch",
+                    "variant": "default"
+                },
+                "switch-06-00": {
+                    "x": 0,
+                    "y": 6,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 0,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-06-01": {
+                    "x": 1,
+                    "y": 6,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 1,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-06-02": {
+                    "x": 2,
+                    "y": 6,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 2,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-06-03": {
+                    "x": 3,
+                    "y": 6,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 3,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-06-04": {
+                    "x": 4,
+                    "y": 6,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 4,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-06-05": {
+                    "x": 5,
+                    "y": 6,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 5,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "L-00-00": {
+                    "label": "Esc",
+                    "x": 0,
+                    "y": 2.5057336141214868
+                },
+                "L-00-01": {
+                    "label": "1",
+                    "x": 2,
+                    "y": 2.5057336141214868
+                },
+                "L-00-02": {
+                    "label": "2",
+                    "x": 4,
+                    "y": 2.5057336141214868
+                },
+                "L-00-03": {
+                    "label": "3",
+                    "x": 6,
+                    "y": 2.5057336141214868
+                },
+                "L-00-04": {
+                    "label": "4",
+                    "x": 8,
+                    "y": 2.5057336141214868
+                },
+                "L-00-05": {
+                    "label": "5",
+                    "x": 10,
+                    "y": 2.5057336141214868
+                },
+                "L-01-00": {
+                    "label": "Tab",
+                    "x": 0,
+                    "y": 3.5057336141214868
+                },
+                "L-01-01": {
+                    "label": "Q",
+                    "x": 2,
+                    "y": 3.5057336141214868
+                },
+                "L-01-02": {
+                    "label": "W",
+                    "x": 4,
+                    "y": 3.5057336141214868
+                },
+                "L-01-03": {
+                    "label": "E",
+                    "x": 6,
+                    "y": 3.5057336141214868
+                },
+                "L-01-04": {
+                    "label": "R",
+                    "x": 8,
+                    "y": 3.5057336141214868
+                },
+                "L-01-05": {
+                    "label": "T",
+                    "x": 10,
+                    "y": 3.5057336141214868
+                },
+                "L-02-00": {
+                    "label": "Ctrl",
+                    "x": 0,
+                    "y": 4.505733614121487
+                },
+                "L-02-01": {
+                    "label": "A",
+                    "x": 2,
+                    "y": 4.505733614121487
+                },
+                "L-02-02": {
+                    "label": "S",
+                    "x": 4,
+                    "y": 4.505733614121487
+                },
+                "L-02-03": {
+                    "label": "D",
+                    "x": 6,
+                    "y": 4.505733614121487
+                },
+                "L-02-04": {
+                    "label": "F",
+                    "x": 8,
+                    "y": 4.505733614121487
+                },
+                "L-02-05": {
+                    "label": "G",
+                    "x": 10,
+                    "y": 4.505733614121487
+                },
+                "L-03-00": {
+                    "label": "Shift",
+                    "x": 0,
+                    "y": 5.505733614121487
+                },
+                "L-03-01": {
+                    "label": "Z",
+                    "x": 2,
+                    "y": 5.505733614121487
+                },
+                "L-03-02": {
+                    "label": "X",
+                    "x": 4,
+                    "y": 5.505733614121487
+                },
+                "L-03-03": {
+                    "label": "C",
+                    "x": 6,
+                    "y": 5.505733614121487
+                },
+                "L-03-04": {
+                    "label": "V",
+                    "x": 8,
+                    "y": 5.505733614121487
+                },
+                "L-03-05": {
+                    "label": "B",
+                    "x": 10,
+                    "y": 5.505733614121487
+                },
+                "L-04-00": {
+                    "label": "IME OFF",
+                    "x": 3,
+                    "y": 7.505733614121487
+                },
+                "L-04-01": {
+                    "label": "Fn1",
+                    "x": 5,
+                    "y": 7.505733614121487
+                },
+                "L-05-00": {
+                    "label": "Win",
+                    "x": 3,
+                    "y": 8.505733614121487
+                },
+                "L-05-01": {
+                    "label": "Alt",
+                    "x": 5,
+                    "y": 8.505733614121487
+                },
+                "padding-00": {
+                    "x": 6.914999999999999,
+                    "y": 1.485,
+                    "a": -25,
+                    "width": 1,
+                    "height": 3.375,
+                    "row": 0,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                },
+                "padding-01": {
+                    "x": 3.5,
+                    "y": 0.25,
+                    "a": 0,
+                    "width": 6,
+                    "height": 1,
+                    "row": 1,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                },
+                "padding-02": {
+                    "x": 1.525,
+                    "y": 3.76,
+                    "a": 0,
+                    "width": 2,
+                    "height": 2,
+                    "row": 2,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                },
+                "padding-03": {
+                    "x": 7.105,
+                    "y": 4.059999999999999,
+                    "a": 0,
+                    "width": 2,
+                    "height": 1.875,
+                    "row": 3,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                }
+            },
+            "row": 5,
+            "col": 7
+        },
+        "rightData": {
+            "schemeVersion": "1.3",
+            "modules": {
+                "switch-00-00": {
+                    "moduleType": "switch",
+                    "x": 2.27,
+                    "y": 0.75,
+                    "row": 0,
+                    "col": 0,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-00-01": {
+                    "moduleType": "switch",
+                    "x": 3.2700000000000005,
+                    "y": 0.75,
+                    "row": 0,
+                    "col": 1,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-00-02": {
+                    "moduleType": "switch",
+                    "x": 4.27,
+                    "y": 0.75,
+                    "row": 0,
+                    "col": 2,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-00-03": {
+                    "moduleType": "switch",
+                    "x": 5.27,
+                    "y": 0.75,
+                    "row": 0,
+                    "col": 3,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-00-04": {
+                    "moduleType": "switch",
+                    "x": 6.27,
+                    "y": 0.75,
+                    "row": 0,
+                    "col": 4,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-00-05": {
+                    "moduleType": "switch",
+                    "x": 7.27,
+                    "y": 0.75,
+                    "row": 0,
+                    "col": 5,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-00-06": {
+                    "moduleType": "switch",
+                    "x": 8.270000000000001,
+                    "y": 0.75,
+                    "row": 0,
+                    "col": 6,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-00-07": {
+                    "x": 9.27,
+                    "y": 0.75,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 7,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-00-08": {
+                    "x": 9.02,
+                    "y": 0.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-09": {
+                    "x": 10.02,
+                    "y": 0.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-10": {
+                    "x": 11.02,
+                    "y": 0.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-11": {
+                    "x": 12.02,
+                    "y": 0.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-00-12": {
+                    "x": 13.02,
+                    "y": 0.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 0,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-00": {
+                    "moduleType": "switch",
+                    "x": 2.7700000000000005,
+                    "y": 1.75,
+                    "row": 1,
+                    "col": 0,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-01-01": {
+                    "moduleType": "switch",
+                    "x": 3.7700000000000005,
+                    "y": 1.75,
+                    "row": 1,
+                    "col": 1,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-01-02": {
+                    "moduleType": "switch",
+                    "x": 4.77,
+                    "y": 1.75,
+                    "row": 1,
+                    "col": 2,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-01-03": {
+                    "moduleType": "switch",
+                    "x": 5.77,
+                    "y": 1.75,
+                    "row": 1,
+                    "col": 3,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-01-04": {
+                    "moduleType": "switch",
+                    "x": 6.77,
+                    "y": 1.75,
+                    "row": 1,
+                    "col": 4,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-01-05": {
+                    "moduleType": "switch",
+                    "x": 7.77,
+                    "y": 1.75,
+                    "row": 1,
+                    "col": 5,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-01-06": {
+                    "moduleType": "switch",
+                    "x": 8.77,
+                    "y": 1.75,
+                    "row": 1,
+                    "col": 6,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-01-07": {
+                    "x": 9.895,
+                    "y": 1.75,
+                    "a": 0,
+                    "width": 1.25,
+                    "height": 1,
+                    "row": 1,
+                    "col": 7,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-01-08": {
+                    "x": 9.02,
+                    "y": 1.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-09": {
+                    "x": 10.02,
+                    "y": 1.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-10": {
+                    "x": 11.02,
+                    "y": 1.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-11": {
+                    "x": 12.02,
+                    "y": 1.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-01-12": {
+                    "x": 13.02,
+                    "y": 1.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 1,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-00": {
+                    "moduleType": "switch",
+                    "x": 3.0200000000000005,
+                    "y": 2.75,
+                    "row": 2,
+                    "col": 0,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-02-01": {
+                    "moduleType": "switch",
+                    "x": 4.0200000000000005,
+                    "y": 2.75,
+                    "row": 2,
+                    "col": 1,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-02-02": {
+                    "moduleType": "switch",
+                    "x": 5.02,
+                    "y": 2.75,
+                    "row": 2,
+                    "col": 2,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-02-03": {
+                    "moduleType": "switch",
+                    "x": 6.02,
+                    "y": 2.75,
+                    "row": 2,
+                    "col": 3,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-02-04": {
+                    "moduleType": "switch",
+                    "x": 7.02,
+                    "y": 2.75,
+                    "row": 2,
+                    "col": 4,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-02-05": {
+                    "moduleType": "switch",
+                    "x": 8.02,
+                    "y": 2.75,
+                    "row": 2,
+                    "col": 5,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-02-06": {
+                    "moduleType": "switch",
+                    "x": 9.395,
+                    "y": 2.75,
+                    "row": 2,
+                    "col": 6,
+                    "width": 1.75,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-02-07": {
+                    "x": 8.02,
+                    "y": 2.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-08": {
+                    "x": 9.02,
+                    "y": 2.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-09": {
+                    "x": 10.02,
+                    "y": 2.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-10": {
+                    "x": 11.02,
+                    "y": 2.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-11": {
+                    "x": 12.02,
+                    "y": 2.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-02-12": {
+                    "x": 13.02,
+                    "y": 2.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 2,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-00": {
+                    "x": 3.5200000000000005,
+                    "y": 3.75,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "switch",
+                    "variant": ""
+                },
+                "switch-03-01": {
+                    "moduleType": "switch",
+                    "x": 4.52,
+                    "y": 3.75,
+                    "row": 3,
+                    "col": 1,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-03-02": {
+                    "moduleType": "switch",
+                    "x": 5.52,
+                    "y": 3.75,
+                    "row": 3,
+                    "col": 2,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-03-03": {
+                    "moduleType": "switch",
+                    "x": 6.52,
+                    "y": 3.75,
+                    "row": 3,
+                    "col": 3,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": true
+                },
+                "switch-03-04": {
+                    "moduleType": "switch",
+                    "x": 7.52,
+                    "y": 3.75,
+                    "row": 3,
+                    "col": 4,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-03-05": {
+                    "moduleType": "switch",
+                    "x": 8.52,
+                    "y": 3.75,
+                    "row": 3,
+                    "col": 5,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-03-06": {
+                    "moduleType": "switch",
+                    "x": 9.52,
+                    "y": 3.75,
+                    "row": 3,
+                    "col": 6,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-03-07": {
+                    "x": 8.02,
+                    "y": 3.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-08": {
+                    "x": 9.02,
+                    "y": 3.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-09": {
+                    "x": 10.02,
+                    "y": 3.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-10": {
+                    "x": 11.02,
+                    "y": 3.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-11": {
+                    "x": 12.02,
+                    "y": 3.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-03-12": {
+                    "x": 13.02,
+                    "y": 3.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 3,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-00": {
+                    "moduleType": "switch",
+                    "x": 2.02,
+                    "y": 5.809999999999999,
+                    "row": 4,
+                    "col": 0,
+                    "width": 1,
+                    "height": 1,
+                    "a": -30,
+                    "variant": "choc2",
+                    "enabled": true
+                },
+                "switch-04-01": {
+                    "moduleType": "switch",
+                    "x": 2.9810254037844404,
+                    "y": 5.339999999999998,
+                    "row": 4,
+                    "col": 1,
+                    "width": 1,
+                    "height": 1,
+                    "a": -22,
+                    "variant": "choc2",
+                    "enabled": true
+                },
+                "switch-04-02": {
+                    "moduleType": "switch",
+                    "x": 3.9930127018922192,
+                    "y": 5,
+                    "row": 4,
+                    "col": 2,
+                    "width": 1,
+                    "height": 1,
+                    "a": -15,
+                    "variant": "choc2",
+                    "enabled": true
+                },
+                "switch-04-03": {
+                    "moduleType": "switch",
+                    "x": 5.118012701892219,
+                    "y": 4.875,
+                    "row": 4,
+                    "col": 3,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "choc2",
+                    "enabled": true
+                },
+                "switch-04-04": {
+                    "moduleType": "switch",
+                    "x": 6.395,
+                    "y": 4.75,
+                    "row": 4,
+                    "col": 4,
+                    "width": 1.5,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-04-05": {
+                    "moduleType": "switch",
+                    "x": 7.645,
+                    "y": 4.75,
+                    "row": 4,
+                    "col": 5,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "enabled": true,
+                    "variant": ""
+                },
+                "switch-04-06": {
+                    "moduleType": "switch",
+                    "x": 8.36801270189222,
+                    "y": 5.125,
+                    "row": 4,
+                    "col": 6,
+                    "width": 1,
+                    "height": 1,
+                    "a": 0,
+                    "variant": "",
+                    "enabled": false
+                },
+                "switch-04-07": {
+                    "x": 8.02,
+                    "y": 4.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-08": {
+                    "x": 9.02,
+                    "y": 4.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-09": {
+                    "x": 10.02,
+                    "y": 4.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-10": {
+                    "x": 11.02,
+                    "y": 4.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-11": {
+                    "x": 12.02,
+                    "y": 4.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-04-12": {
+                    "x": 13.02,
+                    "y": 4.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 4,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-00": {
+                    "x": 1.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 0,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-01": {
+                    "x": 2.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 1,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-02": {
+                    "x": 3.0200000000000005,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 2,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-03": {
+                    "x": 4.0200000000000005,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 3,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-04": {
+                    "x": 5.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 4,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-05": {
+                    "x": 6.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 5,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-06": {
+                    "x": 7.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 6,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-07": {
+                    "x": 8.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 7,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-08": {
+                    "x": 9.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 8,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-09": {
+                    "x": 10.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 9,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-10": {
+                    "x": 11.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 10,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-11": {
+                    "x": 12.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 11,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-05-12": {
+                    "x": 13.02,
+                    "y": 5.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 5,
+                    "col": 12,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "controller": {
+                    "x": 5.27,
+                    "y": 0.75,
+                    "a": 0,
+                    "width": 0,
+                    "height": 1,
+                    "row": 6,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "controller",
+                    "variant": "side-1"
+                },
+                "encoder": {
+                    "x": 1.02,
+                    "y": 0.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 1,
+                    "enabled": false,
+                    "moduleType": "encoder"
+                },
+                "trackball": {
+                    "x": 1.52,
+                    "y": 3.875,
+                    "a": -70,
+                    "width": 2,
+                    "height": 2,
+                    "row": 6,
+                    "col": 2,
+                    "enabled": true,
+                    "moduleType": "trackball",
+                    "variant": "thumb-34"
+                },
+                "trackpad": {
+                    "x": 1.02,
+                    "y": 0.5,
+                    "a": 0,
+                    "width": 2,
+                    "height": 2,
+                    "row": 5,
+                    "col": 3,
+                    "enabled": false,
+                    "moduleType": "trackpad",
+                    "variant": "circle-30"
+                },
+                "switch-06-00": {
+                    "x": 1.27,
+                    "y": 6.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 0,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-06-01": {
+                    "x": 2.27,
+                    "y": 6.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 1,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-06-02": {
+                    "x": 3.2700000000000005,
+                    "y": 6.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 2,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "switch-06-03": {
+                    "x": 4.27,
+                    "y": 6.5,
+                    "a": 0,
+                    "width": 1,
+                    "height": 1,
+                    "row": 6,
+                    "col": 3,
+                    "enabled": false,
+                    "moduleType": "switch"
+                },
+                "R-00-00": {
+                    "label": "6",
+                    "x": 21.155000000000005,
+                    "y": 2.5
+                },
+                "R-00-01": {
+                    "label": "7",
+                    "x": 23.155000000000005,
+                    "y": 2.5
+                },
+                "R-00-02": {
+                    "label": "8",
+                    "x": 25.155000000000005,
+                    "y": 2.5
+                },
+                "R-00-03": {
+                    "label": "9",
+                    "x": 27.155000000000005,
+                    "y": 2.5
+                },
+                "R-00-04": {
+                    "label": "0",
+                    "x": 29.155000000000005,
+                    "y": 2.5
+                },
+                "R-00-05": {
+                    "label": "-",
+                    "x": 31.155000000000005,
+                    "y": 2.5
+                },
+                "R-00-06": {
+                    "label": "=",
+                    "x": 33.155,
+                    "y": 2.5
+                },
+                "R-00-07": {
+                    "label": "\\",
+                    "x": 35.155,
+                    "y": 2.5
+                },
+                "R-01-00": {
+                    "label": "Y",
+                    "x": 21.155000000000005,
+                    "y": 3.5
+                },
+                "R-01-01": {
+                    "label": "U",
+                    "x": 23.155000000000005,
+                    "y": 3.5
+                },
+                "R-01-02": {
+                    "label": "I",
+                    "x": 25.155000000000005,
+                    "y": 3.5
+                },
+                "R-01-03": {
+                    "label": "O",
+                    "x": 27.155000000000005,
+                    "y": 3.5
+                },
+                "R-01-04": {
+                    "label": "P",
+                    "x": 29.155000000000005,
+                    "y": 3.5
+                },
+                "R-01-05": {
+                    "label": "[",
+                    "x": 31.155000000000005,
+                    "y": 3.5
+                },
+                "R-01-06": {
+                    "label": "]",
+                    "x": 33.155,
+                    "y": 3.5
+                },
+                "R-01-07": {
+                    "label": "Bsp",
+                    "x": 35.155,
+                    "y": 3.5
+                },
+                "R-02-00": {
+                    "label": "H",
+                    "x": 21.155000000000005,
+                    "y": 4.5
+                },
+                "R-02-01": {
+                    "label": "J",
+                    "x": 23.155000000000005,
+                    "y": 4.5
+                },
+                "R-02-02": {
+                    "label": "K",
+                    "x": 25.155000000000005,
+                    "y": 4.5
+                },
+                "R-02-03": {
+                    "label": "L",
+                    "x": 27.155000000000005,
+                    "y": 4.5
+                },
+                "R-02-04": {
+                    "label": ";",
+                    "x": 29.155000000000005,
+                    "y": 4.5
+                },
+                "R-02-05": {
+                    "label": "'",
+                    "x": 31.155000000000005,
+                    "y": 4.5
+                },
+                "R-02-06": {
+                    "label": "Ent",
+                    "x": 33.155,
+                    "y": 4.5
+                },
+                "R-03-00": {
+                    "label": "N",
+                    "x": 21.155000000000005,
+                    "y": 5.5
+                },
+                "R-03-01": {
+                    "label": "M",
+                    "x": 23.155000000000005,
+                    "y": 5.5
+                },
+                "R-03-02": {
+                    "label": ",",
+                    "x": 25.155000000000005,
+                    "y": 5.5
+                },
+                "R-03-03": {
+                    "label": ".",
+                    "x": 27.155000000000005,
+                    "y": 5.5
+                },
+                "R-03-04": {
+                    "label": "/",
+                    "x": 29.155000000000005,
+                    "y": 5.5
+                },
+                "R-03-05": {
+                    "label": "Shift",
+                    "x": 31.155000000000005,
+                    "y": 5.5
+                },
+                "R-04-00": {
+                    "label": "Fn2",
+                    "x": 26.155000000000005,
+                    "y": 7.5
+                },
+                "R-04-01": {
+                    "label": "Menu",
+                    "x": 28.155000000000005,
+                    "y": 7.5
+                },
+                "R-05-00": {
+                    "label": "Space",
+                    "x": 26.155000000000005,
+                    "y": 8.5
+                },
+                "R-05-01": {
+                    "label": "Enter",
+                    "x": 28.155000000000005,
+                    "y": 8.5
+                },
+                "padding-00": {
+                    "x": 1.5,
+                    "y": 4.904999999999994,
+                    "a": -30,
+                    "width": 1,
+                    "height": 2,
+                    "row": 0,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                },
+                "padding-01": {
+                    "x": 1.0250000000000001,
+                    "y": 3.5099999999999945,
+                    "a": 0,
+                    "width": 1,
+                    "height": 0.875,
+                    "row": 1,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                },
+                "padding-02": {
+                    "x": 1.415,
+                    "y": 1.645,
+                    "a": 25,
+                    "width": 0.625,
+                    "height": 2.5,
+                    "row": 2,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                },
+                "padding-03": {
+                    "x": 5.75,
+                    "y": 0.775,
+                    "a": 0,
+                    "width": 8,
+                    "height": 1,
+                    "row": 3,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                },
+                "padding-04": {
+                    "x": 10,
+                    "y": 2.6949999999999985,
+                    "a": 10,
+                    "width": 1,
+                    "height": 3,
+                    "row": 4,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                },
+                "padding-05": {
+                    "x": 10.194999999999999,
+                    "y": 0.8150000000000002,
+                    "a": -40,
+                    "width": 0.5,
+                    "height": 1.125,
+                    "row": 5,
+                    "col": 0,
+                    "enabled": true,
+                    "moduleType": "padding",
+                    "variant": ""
+                }
+            },
+            "row": 5,
+            "col": 8
+        }
+    },
+    "case": {
+        "topHeight": 11.5,
+        "plateHeight": 5,
+        "connectorHeight": 2.5,
+        "switchBoardHeight": 1.6,
+        "controllerBoardHeight": 1.6,
+        "batteryHeight": 6.2,
+        "partsHeight": 2.5,
+        "usbHeight": 3.5,
+        "bottomMinThickness": 3,
+        "tiltingAngle": 6,
+        "tentingAngle": 9,
+        "topRim": 2.5,
+        "bottomRim": 5,
+        "chamferHeight": 2,
+        "chamferAngle": 30,
+        "switchEmbankment": 0,
+        "snapDirection": "horizontal",
+        "mountType": "gasket",
+        "chamferType": "C",
+        "lowerChamferHeight": 2,
+        "cornerType": "default"
+    }
+}

@@ -1,0 +1,23 @@
+
+if SHIELD_TSTK_TL6TN9_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "tstk_tl6tn9"
+
+config ZMK_POINTING
+    default y
+
+config PAW3222
+    default y
+
+config PAW3222_BEHAVIOR
+    default y
+
+endif
+
+if SHIELD_TSTK_TL6TN9_LEFT || SHIELD_TSTK_TL6TN9_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif

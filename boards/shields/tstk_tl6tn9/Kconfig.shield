@@ -1,0 +1,4 @@
+config SHIELD_TSTK_TL6TN9_LEFT
+    def_bool $(shields_list_contains,tstk_tl6tn9_left)
+config SHIELD_TSTK_TL6TN9_RIGHT
+    def_bool $(shields_list_contains,tstk_tl6tn9_right)
