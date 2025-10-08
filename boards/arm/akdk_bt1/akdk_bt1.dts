@@ -75,6 +75,12 @@
 	status = "okay";
 };
 
+&uart0 {
+	status = "okay";
+	current-speed = <115200>;
+	/* 必要に応じてpinctrl-0/pinctrl-namesを追加 */
+};
+
 zephyr_udc0: &usbd {
 	status = "okay";
 };
