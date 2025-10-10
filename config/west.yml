@@ -14,5 +14,3 @@ manifest:
       revision: feature/seamless-xy-scroll-2
   self:
     path: config
-
-  
