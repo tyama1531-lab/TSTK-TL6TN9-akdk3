@@ -26,6 +26,7 @@
             >;
         };
 
+
         layer_1 {
             bindings = <
     /* 1行 */ &kp ESC   &kp F1         &kp F2         &kp F3    &kp F4    &kp F5                &kp F6      &kp F7    &kp F8     &kp F9    &kp F10     &none     &none     &kp GRAVE
