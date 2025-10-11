@@ -8,7 +8,7 @@
             compatible = "paw32xx,mode";
             label = "PAW_MODE";
             #binding-cells = <1>;
-        };
+        }
         
         output_usb: output_usb {
             compatible = "zmk,behavior-output-set";
