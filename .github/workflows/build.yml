@@ -3,4 +3,15 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # ...（ZMKビルドのためのセットアップやwest buildなど）...
+
+      - name: Upload .config artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: zephyr-config
+          path: build/zephyr/.config
