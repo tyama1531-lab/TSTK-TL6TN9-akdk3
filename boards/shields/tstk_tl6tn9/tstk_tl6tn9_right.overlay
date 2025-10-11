@@ -7,6 +7,7 @@
 / {
     chosen {
         zmk,physical-layout = &physical_layout0;
+        zephyr,console = &uart0;
     };
 
     default_transform: keymap_transform_0 {
