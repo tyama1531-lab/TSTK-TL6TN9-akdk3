@@ -89,6 +89,8 @@ zephyr_udc0: &usbd {
 		compatible = "fixed-partitions";
 		#address-cells = <1>;
 		#size-cells = <1>;
+			pinctrl-0 = <&uart0_default>;
+			pinctrl-names = "default";
 
 		sd_partition: partition@0 {
 			label = "softdevice";
