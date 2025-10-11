@@ -8,6 +8,7 @@
         output_usb: output_usb {
             compatible = "zmk,behavior-output-set";
             label = "OUTPUT_USB";
+            #binding-cells = <0>;
             default-output = <OUT_USB>;
         };
     };
