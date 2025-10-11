@@ -126,4 +126,3 @@ zephyr_udc0: &usbd {
 	tx-pin = <6>;
 	rx-pin = <8>;
 };
-};
