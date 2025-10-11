@@ -2,10 +2,15 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: tyama1531-lab
+      url-base: https://github.com/tyama1531-lab
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    - name: zmk-driver-paw3222-alpha3
+      remote: tyama1531-lab
+      revision: feature/seamless-xy-scroll-2
   self:
     path: config
