@@ -11,7 +11,7 @@ jobs:
       # ...（ZMKビルドのためのセットアップやwest buildなど）...
 
       - name: Upload .config artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: zephyr-config
           path: build/zephyr/.config
