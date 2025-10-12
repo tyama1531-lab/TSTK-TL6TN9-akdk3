@@ -5,6 +5,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: List config directory
+        run: ls config
+
+      - name: Check west.yml existence
+        run: ls config/west.yml
       - name: Install west
         run: pip install west
 
