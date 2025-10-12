@@ -1,13 +1,15 @@
+
 include:
   - board: akdk_bt1
     shield: tstk_tl6tn9_left
-    snippet:
-      - studio-rpc-usb-uart
-      - zmk-usb-logging
+    snippet: studio-rpc-usb-uart
+    snippet: zmk-usb-logging
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: akdk_bt1
     shield: tstk_tl6tn9_right
-    snippet:
-      - studio-rpc-usb-uart
-      - zmk-usb-logging
+    snippet: studio-rpc-usb-uart
+    snippet: zmk-usb-logging
     cmake-args: -DCONFIG_ZMK_STUDIO=y
+  - board: akdk_bt1
+    shield: settings_reset
+
