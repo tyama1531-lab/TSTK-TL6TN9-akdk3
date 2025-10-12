@@ -3,35 +3,4 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: List config directory
-        run: ls config
-
-      - name: Check west.yml existence
-        run: ls config/west.yml
-      - name: Install west
-        run: pip install west
-
-      - name: Init west workspace
-        run: west init -l config
-      - name: Update west modules
-        run: west update
-
-      - name: Remove previous build artifacts
-        run: rm -rf build out
-
-      - name: Build (pristine)
-        run: west build --pristine
-
-      - name: Show .config
-        run: |
-          if [ -f build/.config ]; then
-            echo ".config found in build/"
-            cat build/.config
-          elif [ -f out/.config ]; then
-            echo ".config found in out/"
-            cat out/.config
-          else
-            echo ".config not found"
-          fi
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
