@@ -9,7 +9,7 @@ jobs:
         run: pip install west
 
       - name: Init west workspace
-        run: west init -l .
+        run: west init -l config
       - name: Update west modules
         run: west update
 
