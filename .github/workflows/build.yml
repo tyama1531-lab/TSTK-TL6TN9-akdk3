@@ -5,6 +5,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Init west workspace
+        run: west init -l .
+      - name: Update west modules
+        run: west update
       - name: Install west
         run: pip install west
 
