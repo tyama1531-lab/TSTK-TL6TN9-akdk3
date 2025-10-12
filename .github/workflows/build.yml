@@ -3,13 +3,4 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install west
-        run: pip install west
-
-      - name: Remove previous build artifacts
-        run: rm -rf build out
-
-      - name: Build (pristine)
-        run: west build --pristine
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
