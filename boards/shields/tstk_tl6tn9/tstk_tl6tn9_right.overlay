@@ -99,6 +99,7 @@
 
         // スクロール関連のパラメータ
         snipe-layers = <3>;         // layer_3がアクティブならSNIPEモードになる
+        scroll-layers = <2>;        // layer_2がアクティブならSCROLLモードになる
         bothscroll_layers = <4>;    // layer_4がアクティブならX-Y-SEAMLESS-SCROLLモードになる
         rotation = <90>;            // スクロール方向を通常（トラックボール上下＝画面上下）
     };
