@@ -14,4 +14,3 @@ manifest:
       revision: feature/special-char-input
   self:
     path: config
-
