@@ -11,7 +11,7 @@ manifest:
       import: app/west.yml
     - name: zmk-driver-paw3222-alpha3
       remote: tyama1531-lab
-      revision: feature/seamless-xy-scroll-3
+      revision: feature/special-char-input
   self:
     path: config
 
