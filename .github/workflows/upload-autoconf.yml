@@ -12,7 +12,7 @@ on:
 jobs:
   upload-autoconf:
     runs-on: ubuntu-latest
-    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch' }}
+    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
     strategy:
       matrix:
         board: ["tstk_tl6tn9_left", "tstk_tl6tn9_right"]
