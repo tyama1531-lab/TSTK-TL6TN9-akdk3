@@ -2,8 +2,6 @@ name: Upload autoconf (simple)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
 
 jobs:
   build-and-upload:

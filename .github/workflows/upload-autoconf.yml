@@ -1,13 +1,7 @@
 name: Upload autoconf artifacts
 
 on:
-  push:
-    branches: [ main ]
-  workflow_run:
-    workflows: ["Build ZMK firmware"]
-    types:
-      - completed
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 jobs:
   upload-autoconf:
