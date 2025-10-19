@@ -47,7 +47,7 @@ jobs:
         working-directory: .
         run: |
           # Adjust board names if your board folder uses different naming
-          west build -b ${{ matrix.board }} -s . -d build-${{ matrix.board }} || true
+          west build -b ${{ matrix.board }} -s . -d build-${{ matrix.board }} 2>&1 | tee build-${{ matrix.board }}.log || true
 
       - name: List build directory (for debugging)
         run: |
@@ -80,5 +80,6 @@ jobs:
             build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
             build-${{ matrix.board }}-debug.zip
             workspace-debug.zip
+            build-${{ matrix.board }}.log
 
             
