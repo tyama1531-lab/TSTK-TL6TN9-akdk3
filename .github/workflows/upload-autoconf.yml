@@ -46,13 +46,36 @@ jobs:
             if west init -m https://github.com/zmkfirmware/zmk .; then
               echo 'west init -m succeeded'
             else
-              echo 'west init -m failed; attempting fallback: download raw west.yml and retry'
-              mkdir -p /tmp/west-manifest
-              if curl -fsSL -o /tmp/west-manifest/west.yml https://raw.githubusercontent.com/zmkfirmware/zmk/main/west.yml; then
-                ls -la /tmp/west-manifest || true
-                west init -m /tmp/west-manifest/west.yml . || true
+              echo 'west init -m failed; inspecting cloned manifest repository (.west/manifest-tmp)'
+              if [ -d .west/manifest-tmp ]; then
+                echo 'Contents of .west/manifest-tmp:'
+                ls -la .west/manifest-tmp || true
+                echo 'Searching for *.yml inside manifest-tmp (top 3 levels)'
+                find .west/manifest-tmp -maxdepth 3 -type f -name '*.yml' -print || true
+                # Try to find a west.yml inside the cloned manifest and use it
+                candidate=$(find .west/manifest-tmp -maxdepth 3 -type f -name 'west.yml' -print -quit || true)
+                if [ -n "$candidate" ]; then
+                  echo "Found candidate manifest: $candidate"
+                  west init -m "$candidate" . || true
+                else
+                  echo 'No west.yml found in manifest-tmp; attempting raw download fallback'
+                  mkdir -p /tmp/west-manifest
+                  if curl -fsSL -o /tmp/west-manifest/west.yml https://raw.githubusercontent.com/zmkfirmware/zmk/main/west.yml; then
+                    ls -la /tmp/west-manifest || true
+                    west init -m /tmp/west-manifest/west.yml . || true
+                  else
+                    echo 'Fallback manifest download failed; continuing to west update (may fail)'
+                  fi
+                fi
               else
-                echo 'Fallback manifest download failed; continuing to west update (may fail)'
+                echo '.west/manifest-tmp not present; attempting raw download fallback'
+                mkdir -p /tmp/west-manifest
+                if curl -fsSL -o /tmp/west-manifest/west.yml https://raw.githubusercontent.com/zmkfirmware/zmk/main/west.yml; then
+                  ls -la /tmp/west-manifest || true
+                  west init -m /tmp/west-manifest/west.yml . || true
+                else
+                  echo 'Fallback manifest download failed; continuing to west update (may fail)'
+                fi
               fi
             fi
           fi
