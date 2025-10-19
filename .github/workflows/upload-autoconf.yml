@@ -5,11 +5,12 @@ on:
     workflows: ["Build ZMK firmware"]
     types:
       - completed
+  workflow_dispatch: {}
 
 jobs:
   upload-autoconf:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch' }}
     strategy:
       matrix:
         board: ["tstk_tl6tn9_left", "tstk_tl6tn9_right"]
@@ -39,7 +40,7 @@ jobs:
         working-directory: .
         run: |
           # Adjust board names if your board folder uses different naming
-          west build -b ${ { matrix.board } } -s . -d build-${{ matrix.board }} || true
+          west build -b ${{ matrix.board }} -s . -d build-${{ matrix.board }} || true
 
       - name: Upload autoconf.h
         if: always()
