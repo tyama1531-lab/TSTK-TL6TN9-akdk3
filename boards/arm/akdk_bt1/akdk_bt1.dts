@@ -13,6 +13,9 @@
 		zephyr,sram = &sram0;
 		zephyr,flash = &flash0;
 		zmk,battery = &vbatt;
+//		zephyr,console = &usbd;
+		zephyr,console = &usb_uart;
+    	zephyr,shell-uart = &usb_uart;
 	};
 
 	akdk_d: connector {
@@ -77,6 +80,14 @@
 
 zephyr_udc0: &usbd {
 	status = "okay";
+};
+
+&usbd {
+    status = "okay";
+
+    usb_uart: usb_uart {
+        compatible = "zephyr,cdc-acm-uart";
+    };
 };
 
 &flash0 {

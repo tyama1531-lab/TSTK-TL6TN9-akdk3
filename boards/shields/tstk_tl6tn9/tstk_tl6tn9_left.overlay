@@ -52,3 +52,8 @@
     transform = <&default_transform>;
 };
 
+
+
+&uart0 {
+    status = "disabled";
+};
