@@ -55,6 +55,17 @@ jobs:
           ls -la build-${{ matrix.board }} || true
           ls -la build-${{ matrix.board }}/zephyr || true
 
+      - name: Find autoconf.h and other generated files
+        run: |
+          echo "Searching for autoconf.h under build-${{ matrix.board }}"
+          find build-${{ matrix.board }} -type f -name autoconf.h -print || true
+          echo "Listing any generated include directories"
+          find build-${{ matrix.board }} -type d -name generated -print || true
+
+      - name: Archive build directory (debug)
+        run: |
+          zip -r build-${{ matrix.board }}-debug.zip build-${{ matrix.board }} || true
+
       - name: Upload autoconf.h
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
