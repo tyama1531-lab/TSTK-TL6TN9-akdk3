@@ -1,4 +1,5 @@
 name: Build ZMK firmware (local)
+name: Build ZMK firmware (local)
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -94,8 +95,8 @@ jobs:
           fi
           echo '--- west version and commands (after init/update) ---'
           west --version || true
-          export ZEPHYR_BASE=$(pwd)/zephyr
-          echo "ZEPHYR_BASE=$ZEPHYR_BASE"
+          echo "ZEPHYR_BASE=$(pwd)/zephyr" >> $GITHUB_ENV
+          echo "ZEPHYR_BASE=$(pwd)/zephyr"
           west help || true
 
       - name: Debug west and workspace
@@ -119,16 +120,6 @@ jobs:
           west list || true
           west config || true
           west topdir || true
-
-      - name: Initialize west
-        run: |
-          # Initialize west using upstream ZMK manifest if no local west.yml exists
-          if [ -f west.yml ] || [ -f config/west.yml ]; then
-            west init -l . || true
-          else
-            west init -m https://github.com/zmkfirmware/zmk . || true
-          fi
-          west update || true
 
       - name: Build firmware (generate autoconf)
         working-directory: .
@@ -176,3 +167,4 @@ jobs:
             build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
             build-${{ matrix.board }}.zip
             build-${{ matrix.board }}.log
+
