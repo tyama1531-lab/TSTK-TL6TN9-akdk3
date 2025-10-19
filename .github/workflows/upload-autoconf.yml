@@ -35,11 +35,6 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y build-essential cmake ninja-build
 
-      - name: Verify west commands
-        run: |
-          echo '--- west version and commands ---'
-          west --version || true
-          west help || true
       - name: Initialize west
         run: |
           # Initialize west using upstream ZMK manifest if no local west.yml exists
@@ -49,6 +44,27 @@ jobs:
             west init -m https://github.com/zmkfirmware/zmk . || true
           fi
           west update || true
+
+      - name: Install Zephyr Python requirements and verify west
+        run: |
+          # Install zephyr python requirements (may exist after west update)
+          if [ -d zephyr ]; then
+            python -m pip install --upgrade pip
+            if [ -f zephyr/scripts/requirements-base.txt ]; then
+              pip install -r zephyr/scripts/requirements-base.txt || true
+            fi
+            if [ -f zephyr/scripts/requirements.txt ]; then
+              pip install -r zephyr/scripts/requirements.txt || true
+            fi
+          fi
+          echo '--- west version and commands (after init/update) ---'
+          which west || true
+          python -m pip show west || true
+          west --version || true
+          # ensure ZEPHYR_BASE is set so west loads zephyr extensions
+          echo "ZEPHYR_BASE=$(pwd)/zephyr" >> $GITHUB_ENV
+          echo "ZEPHYR_BASE=$(pwd)/zephyr"
+          west help || true
 
       - name: Build firmware (generate autoconf)
         working-directory: .

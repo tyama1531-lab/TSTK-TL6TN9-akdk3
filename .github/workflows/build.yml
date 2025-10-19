@@ -27,11 +27,30 @@ jobs:
           pip install --upgrade git+https://github.com/zephyrproject-rtos/zephyr.git || true
           sudo apt-get update -y
           sudo apt-get install -y build-essential cmake ninja-build zip
-
-      - name: Verify west commands
+      - name: Initialize west
         run: |
-          echo '--- west version and commands ---'
+          if [ -f west.yml ] || [ -f config/west.yml ]; then
+            west init -l . || true
+          else
+            west init -m https://github.com/zmkfirmware/zmk . || true
+          fi
+          west update || true
+
+      - name: Install Zephyr Python requirements and verify west
+        run: |
+          if [ -d zephyr ]; then
+            python -m pip install --upgrade pip
+            if [ -f zephyr/scripts/requirements-base.txt ]; then
+              pip install -r zephyr/scripts/requirements-base.txt || true
+            fi
+            if [ -f zephyr/scripts/requirements.txt ]; then
+              pip install -r zephyr/scripts/requirements.txt || true
+            fi
+          fi
+          echo '--- west version and commands (after init/update) ---'
           west --version || true
+          export ZEPHYR_BASE=$(pwd)/zephyr
+          echo "ZEPHYR_BASE=$ZEPHYR_BASE"
           west help || true
 
       - name: Initialize west
