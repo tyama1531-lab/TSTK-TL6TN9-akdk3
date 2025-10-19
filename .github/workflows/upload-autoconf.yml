@@ -73,5 +73,6 @@ jobs:
           name: autoconf-${{ matrix.board }}
           path: |
             build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
+            build-${{ matrix.board }}-debug.zip
 
             
