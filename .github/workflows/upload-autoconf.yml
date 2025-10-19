@@ -1,5 +1,4 @@
 name: Upload autoconf artifacts
-name: Upload autoconf artifacts
 
 on:
   workflow_run:
@@ -54,6 +53,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: autoconf-${{ matrix.board }}
-          path: build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
-            path: build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
+          path: |
+            build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
 
