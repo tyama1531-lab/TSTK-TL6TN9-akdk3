@@ -29,10 +29,17 @@ jobs:
       - name: Install west and cmake
         run: |
           python -m pip install --upgrade pip
-          pip install west==0.13.0
-          sudo apt-get update -y
-          sudo apt-get install -y build-essential cmake ninja-build
+           # Install west and zephyr from upstream to ensure 'west build' command is available
+           pip install --upgrade git+https://github.com/zephyrproject-rtos/west.git
+           pip install --upgrade git+https://github.com/zephyrproject-rtos/zephyr.git || true
+           sudo apt-get update -y
+           sudo apt-get install -y build-essential cmake ninja-build
 
+       - name: Verify west commands
+         run: |
+           echo '--- west version and commands ---'
+           west --version || true
+           west help || true
       - name: Initialize west
         run: |
           # Initialize west using upstream ZMK manifest if no local west.yml exists
