@@ -38,7 +38,7 @@ jobs:
       - name: Initialize west
         run: |
           # Initialize west using upstream ZMK manifest if no local west.yml exists
-          if [ -f west.yml ] || [ -f config/west.yml ]; then
+          if [ -f west.yml ]; then
             west init -l . || true
           else
             west init -m https://github.com/zmkfirmware/zmk . || true
