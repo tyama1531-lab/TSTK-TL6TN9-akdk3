@@ -66,6 +66,28 @@ jobs:
           echo "ZEPHYR_BASE=$(pwd)/zephyr"
           west help || true
 
+      - name: Debug west and workspace
+        run: |
+          echo '--- debug: which/pip show/freeze ---'
+          which west || true
+          python -m pip show west || true
+          python -m pip show zephyr || true
+          echo '--- pip freeze (top 200 lines) ---'
+          python -m pip freeze | head -n 200 || true
+          echo '--- .west and zephyr tree ---'
+          ls -la .west || true
+          if [ -d zephyr ]; then
+            ls -la zephyr || true
+            ls -la zephyr/scripts || true
+          fi
+          if [ -f .west/manifest.yml ]; then
+            echo '--- .west/manifest.yml ---'; cat .west/manifest.yml || true
+          fi
+          echo '--- west list/config/topdir ---'
+          west list || true
+          west config || true
+          west topdir || true
+
       - name: Build firmware (generate autoconf)
         working-directory: .
         run: |
