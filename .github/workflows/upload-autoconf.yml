@@ -190,7 +190,7 @@ jobs:
       - name: Archive workspace (always include for debugging)
         run: |
           echo "Creating workspace-debug.zip (excludes .git)"
-          zip -r workspace-debug.zip . -x .git\* || true
+          zip -r workspace-debug.zip . -x ".git/*" || true
 
       - name: Upload autoconf.h
         if: ${{ always() }}
