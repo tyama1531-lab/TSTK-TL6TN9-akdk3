@@ -66,6 +66,11 @@ jobs:
         run: |
           zip -r build-${{ matrix.board }}-debug.zip build-${{ matrix.board }} || true
 
+      - name: Archive workspace (always include for debugging)
+        run: |
+          echo "Creating workspace-debug.zip (excludes .git)"
+          zip -r workspace-debug.zip . -x .git\* || true
+
       - name: Upload autoconf.h
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
@@ -74,5 +79,6 @@ jobs:
           path: |
             build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
             build-${{ matrix.board }}-debug.zip
+            workspace-debug.zip
 
             
