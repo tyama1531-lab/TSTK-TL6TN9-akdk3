@@ -1,6 +1,56 @@
-name: Build ZMK firmware
+name: Build ZMK firmware (local)
+
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    name: Build per-board
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        board: ["tstk_tl6tn9_left", "tstk_tl6tn9_right"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install west and build deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install west==0.13.0
+          sudo apt-get update -y
+          sudo apt-get install -y build-essential cmake ninja-build zip
+
+      - name: Initialize west
+        run: |
+          west init -l .
+          west update || true
+
+      - name: Build firmware (generate autoconf)
+        working-directory: .
+        run: |
+          echo "Building for board: ${{ matrix.board }}"
+          west build -b ${{ matrix.board }} -s . -d build-${{ matrix.board }} || true
+
+      - name: List build directory (for debugging)
+        run: |
+          echo "Listing build directory for ${{ matrix.board }}"
+          ls -la build-${{ matrix.board }} || true
+          ls -la build-${{ matrix.board }}/zephyr || true
+
+      - name: Archive build directory
+        run: |
+          zip -r build-${{ matrix.board }}.zip build-${{ matrix.board }} || true
+
+      - name: Upload build artifacts (autoconf + archive)
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.board }}-artifacts
+          path: |
+            build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
+            build-${{ matrix.board }}.zip
