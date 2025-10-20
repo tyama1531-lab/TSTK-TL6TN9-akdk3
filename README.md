@@ -25,116 +25,116 @@ USB-C cable|1|
 |Diode|66|
 |Keycap|66|
 
-## Features
+## 機能
 
-### PAW3222 Trackball Support
+### PAW3222 トラックボール対応
 
-This keyboard includes PAW3222 trackball support on the right side with advanced power management features:
+このキーボードは右手側にPAW3222トラックボールを搭載し、高度な電源管理機能を備えています：
 
-#### 🔋 Power Management
-- **Idle Timeout**: Automatic sleep mode after 5 seconds of inactivity
-- **Reduced Scan**: Lower power consumption during inactive periods  
-- **Power Control**: Hardware-level sensor sleep/wake support
+#### 🔋 電源管理
+- **アイドルタイムアウト**: 5秒間操作がないと自動的にスリープモードに移行
+- **スキャン頻度削減**: 非アクティブ時の消費電力を削減  
+- **パワーコントロール**: ハードウェアレベルでのセンサーのスリープ/ウェイク制御
 
-#### ⚙️ Configuration Options
+#### ⚙️ 設定オプション
 
-The following configuration options are available in `boards/shields/tstk_tl6tn9/tstk_tl6tn9_right.conf`:
+以下の設定オプションが `boards/shields/tstk_tl6tn9/tstk_tl6tn9_right.conf` で利用可能です：
 
 ```properties
-# PAW3222 Idle and Power Management
-CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=5     # Idle timeout (seconds)
-CONFIG_PAW3222_REDUCED_SCAN=y             # Enable reduced scanning
-CONFIG_PAW3222_REDUCED_SCAN_MS=100        # Scan interval during reduced mode (ms)
-CONFIG_PAW3222_POWER_CTRL=y               # Enable hardware power control
+# PAW3222 アイドル・電源管理
+CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=5     # アイドルタイムアウト（秒）
+CONFIG_PAW3222_REDUCED_SCAN=y             # スキャン頻度削減を有効化
+CONFIG_PAW3222_REDUCED_SCAN_MS=100        # 削減モード時のスキャン間隔（ミリ秒）
+CONFIG_PAW3222_POWER_CTRL=y               # ハードウェア電源制御を有効化
 ```
 
-#### 📊 Default Settings
+#### 📊 デフォルト設定
 
-| Setting | Value | Description |
+| 設定項目 | 値 | 説明 |
 |---------|-------|-------------|
-| `IDLE_TIMEOUT_SECONDS` | 5 | Time until idle mode activation |
-| `REDUCED_SCAN` | Enabled | Motion timer optimization |
-| `REDUCED_SCAN_MS` | 100ms | Polling interval during reduced scan |
-| `POWER_CTRL` | Enabled | Hardware sleep/wake control |
+| `IDLE_TIMEOUT_SECONDS` | 5 | アイドルモード移行までの時間 |
+| `REDUCED_SCAN` | 有効 | モーションタイマーの最適化 |
+| `REDUCED_SCAN_MS` | 100ms | スキャン頻度削減時のポーリング間隔 |
+| `POWER_CTRL` | 有効 | ハードウェアスリープ/ウェイク制御 |
 
-#### 🔧 Customization
+#### 🔧 カスタマイズ
 
-To modify power management behavior:
+電源管理の動作を変更するには：
 
-1. Edit `boards/shields/tstk_tl6tn9/tstk_tl6tn9_right.conf`
-2. Adjust the CONFIG values according to your preferences
-3. Rebuild firmware with `west build`
+1. `boards/shields/tstk_tl6tn9/tstk_tl6tn9_right.conf` を編集
+2. CONFIG値を好みに応じて調整
+3. `west build` でファームウェアを再ビルド
 
-**Example for longer battery life:**
+**バッテリー持続時間重視の設定例:**
 ```properties
-CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=10    # Longer idle timeout
-CONFIG_PAW3222_REDUCED_SCAN_MS=200        # Slower scanning
+CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=10    # より長いアイドルタイムアウト
+CONFIG_PAW3222_REDUCED_SCAN_MS=200        # より遅いスキャン
 ```
 
-**Example for maximum responsiveness:**
+**最大応答性重視の設定例:**
 ```properties
-CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=30    # Minimal idle timeout
-CONFIG_PAW3222_REDUCED_SCAN_MS=50         # Faster scanning
+CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=30    # 最小限のアイドルタイムアウト
+CONFIG_PAW3222_REDUCED_SCAN_MS=50         # より高速なスキャン
 ```
 
-## Building
+## ビルド方法
 
-This firmware uses ZMK with west build system and includes a custom PAW3222 driver.
+このファームウェアはwest ビルドシステムを使用するZMKとカスタムPAW3222ドライバーを使用しています。
 
-### Prerequisites
-- West build environment
-- ZMK development setup
+### 前提条件
+- West ビルド環境
+- ZMK 開発環境のセットアップ
 
-### Build Commands
+### ビルドコマンド
 ```bash
-# Build left side firmware
+# 左手側ファームウェアのビルド
 west build -b akdk_bt1 -- -DSHIELD=tstk_tl6tn9_left
 
-# Build right side firmware  
+# 右手側ファームウェアのビルド
 west build -b akdk_bt1 -- -DSHIELD=tstk_tl6tn9_right
 
-# Settings reset firmware
+# 設定リセット用ファームウェア
 west build -b akdk_bt1 -- -DSHIELD=settings_reset
 ```
 
 ### CI/CD
-GitHub Actions automatically builds firmware on push/PR:
-- Left side: `tstk_tl6tn9_left-akdk_bt1-zmk.uf2`
-- Right side: `tstk_tl6tn9_right-akdk_bt1-zmk.uf2`  
-- Settings reset: `settings_reset-akdk_bt1-zmk.uf2`
+GitHub Actionsが push/PR 時に自動的にファームウェアをビルドします：
+- 左手側: `tstk_tl6tn9_left-akdk_bt1-zmk.uf2`
+- 右手側: `tstk_tl6tn9_right-akdk_bt1-zmk.uf2`  
+- 設定リセット: `settings_reset-akdk_bt1-zmk.uf2`
 
-## Troubleshooting
+## トラブルシューティング
 
-### PAW3222 Power Management
+### PAW3222 電源管理
 
-**Issue: Trackball not responding after idle**
-- Check `CONFIG_PAW3222_POWER_CTRL=y` is enabled
-- Verify idle timeout settings
-- Monitor logs for power state transitions
+**問題: アイドル後にトラックボールが反応しない**
+- `CONFIG_PAW3222_POWER_CTRL=y` が有効になっているか確認
+- アイドルタイムアウト設定を確認
+- 電源状態の切り替えログを監視
 
-**Issue: Battery drain too high**
-- Increase `CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS`
-- Increase `CONFIG_PAW3222_REDUCED_SCAN_MS`
-- Ensure `CONFIG_PAW3222_REDUCED_SCAN=y`
+**問題: バッテリー消耗が激しい**
+- `CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS` を増やす
+- `CONFIG_PAW3222_REDUCED_SCAN_MS` を増やす
+- `CONFIG_PAW3222_REDUCED_SCAN=y` が有効か確認
 
-**Issue: Trackball response too slow**
-- Decrease `CONFIG_PAW3222_REDUCED_SCAN_MS` 
-- Decrease `CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS`
+**問題: トラックボールの応答が遅い**
+- `CONFIG_PAW3222_REDUCED_SCAN_MS` を減らす
+- `CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS` を減らす
 
-### Debugging
+### デバッグ
 
-Enable debug logging in your `.conf` file:
+`.conf` ファイルでデバッグログを有効化：
 ```properties
 CONFIG_ZMK_LOG_LEVEL_DBG=y
 CONFIG_ZMK_USB_LOGGING=y
 ```
 
-Look for PAW3222 log messages:
+PAW3222関連のログメッセージを確認：
 - `PAW32XX: idle timeout reached, entering idle`
 - `PAW32XX: motion detected while idle -> waking up`
 - `PAW32XX: sensor set to sleep`
 - `PAW32XX: sensor wake request succeeded`
 
-## License
+## ライセンス
 
-[License information here]
+[ライセンス情報をここに記載]
