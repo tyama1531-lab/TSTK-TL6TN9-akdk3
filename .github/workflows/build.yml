@@ -26,9 +26,15 @@ jobs:
 
       - name: Initialize and update west
         run: |
-          if [ -f west.yml ]; then
+          # Prefer the manifest stored at config/west.yml in this repository
+          if [ -f config/west.yml ]; then
+            echo 'Found local manifest at config/west.yml'
+            west init -m config/west.yml . || true
+          elif [ -f west.yml ]; then
+            echo 'Found top-level west.yml, using local init'
             west init -l . || true
           else
+            echo 'No local manifest found; attempting upstream zmk manifest'
             west init -m https://github.com/zmkfirmware/zmk . || true
           fi
           west update || true
