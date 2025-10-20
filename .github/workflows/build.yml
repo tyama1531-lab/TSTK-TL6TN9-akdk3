@@ -1,5 +1,4 @@
 name: Build ZMK firmware (local)
-name: Build ZMK firmware (local)
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -20,135 +19,22 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install west and build deps
+      - name: Install west
         run: |
           python -m pip install --upgrade pip
-          # Install west and zephyr from upstream to ensure 'west build' command is available
-          pip install --upgrade git+https://github.com/zephyrproject-rtos/west.git
-          pip install --upgrade git+https://github.com/zephyrproject-rtos/zephyr.git || true
-          sudo apt-get update -y
-          sudo apt-get install -y build-essential cmake ninja-build zip
-      - name: Initialize west
+          pip install --upgrade git+https://github.com/zephyrproject-rtos/west.git || true
+
+      - name: Initialize and update west
         run: |
           if [ -f west.yml ]; then
-            echo 'Found local west.yml, using west init -l .'
             west init -l . || true
           else
-            echo 'No local west.yml, attempting west init -m https://github.com/zmkfirmware/zmk'
-            if west init -m https://github.com/zmkfirmware/zmk .; then
-              echo 'west init -m succeeded'
-            else
-              echo 'west init -m failed; inspecting cloned manifest repository (.west/manifest-tmp)'
-              if [ -d .west/manifest-tmp ]; then
-                echo 'Contents of .west/manifest-tmp:'
-                ls -la .west/manifest-tmp || true
-                echo 'Searching for *.yml inside manifest-tmp (top 3 levels)'
-                find .west/manifest-tmp -maxdepth 3 -type f -name '*.yml' -print || true
-                candidate=$(find .west/manifest-tmp -maxdepth 3 -type f -name 'west.yml' -print -quit || true)
-                if [ -n "$candidate" ]; then
-                  echo "Found candidate manifest: $candidate"
-                  echo 'Removing partially-created .west and retrying with candidate manifest'
-                  rm -rf .west || true
-                  if west init -m "$candidate" .; then
-                    INIT_OK=1
-                  fi
-                else
-                  echo 'No west.yml found in manifest-tmp; attempting raw download fallback'
-                  mkdir -p /tmp/west-manifest
-                  if curl -fsSL -o /tmp/west-manifest/west.yml https://raw.githubusercontent.com/zmkfirmware/zmk/main/west.yml; then
-                    ls -la /tmp/west-manifest || true
-                    rm -rf .west || true
-                    if west init -m /tmp/west-manifest/west.yml .; then
-                      INIT_OK=1
-                    fi
-                  else
-                    echo 'Fallback manifest download failed; will not run west update'
-                  fi
-                fi
-              else
-                echo '.west/manifest-tmp not present; attempting raw download fallback'
-                mkdir -p /tmp/west-manifest
-                if curl -fsSL -o /tmp/west-manifest/west.yml https://raw.githubusercontent.com/zmkfirmware/zmk/main/west.yml; then
-                  ls -la /tmp/west-manifest || true
-                  rm -rf .west || true
-                  if west init -m /tmp/west-manifest/west.yml .; then
-                    INIT_OK=1
-                  fi
-                else
-                  echo 'Fallback manifest download failed; will not run west update'
-                fi
-              fi
-            fi
+            west init -m https://github.com/zmkfirmware/zmk . || true
           fi
           west update || true
 
-      - name: Install Zephyr Python requirements and verify west
+      - name: Build firmware
         run: |
-          if [ -d zephyr ]; then
-            python -m pip install --upgrade pip
-            if [ -f zephyr/scripts/requirements-base.txt ]; then
-              pip install -r zephyr/scripts/requirements-base.txt || true
-            fi
-            if [ -f zephyr/scripts/requirements.txt ]; then
-              pip install -r zephyr/scripts/requirements.txt || true
-            fi
-          fi
-          echo '--- west version and commands (after init/update) ---'
-          west --version || true
-          echo "ZEPHYR_BASE=$(pwd)/zephyr" >> $GITHUB_ENV
-          echo "ZEPHYR_BASE=$(pwd)/zephyr"
-          west help || true
-
-      - name: Debug west and workspace
-        run: |
-          echo '--- debug: which/pip show/freeze ---'
-          which west || true
-          name: Build ZMK firmware (local)
-
-          on: [push, pull_request, workflow_dispatch]
-
-          jobs:
-            build:
-              name: Build per-board
-              runs-on: ubuntu-latest
-              strategy:
-                matrix:
-                  board: ["tstk_tl6tn9_left", "tstk_tl6tn9_right"]
-
-              steps:
-                - name: Checkout repository
-                  uses: actions/checkout@v4
-
-                - name: Set up Python
-                  uses: actions/setup-python@v4
-                  with:
-                    python-version: '3.10'
-
-                - name: Install west and build deps
-                  run: |
-                    python -m pip install --upgrade pip
-                    pip install --upgrade git+https://github.com/zephyrproject-rtos/west.git
-                    sudo apt-get update -y
-                    sudo apt-get install -y build-essential cmake ninja-build
-
-                - name: Initialize west
-                  run: |
-                    if [ -f west.yml ]; then
-                      west init -l . || true
-                      west update || true
-                    else
-                      west init -m https://github.com/zmkfirmware/zmk . || true
-                      west update || true
-                    fi
-
-                - name: Export ZEPHYR_BASE
-                  run: |
-                    echo "ZEPHYR_BASE=$(pwd)/zephyr" >> $GITHUB_ENV
-
-                - name: Build firmware
-                  run: |
-                    echo "Building for board: ${{ matrix.board }}"
-                    west build -b ${{ matrix.board }} -s . -d build-${{ matrix.board }} || true
-          echo "ZEPHYR_BASE=$(pwd)/zephyr" >> $GITHUB_ENV
-
-          mkdir -p build-${{ matrix.board }}
+          echo "Building for board: ${{ matrix.board }}"
+          west build -b ${{ matrix.board }} -s . -d build-${{ matrix.board }} || true
+                  echo 'Fallback manifest download failed; will not run west update'
