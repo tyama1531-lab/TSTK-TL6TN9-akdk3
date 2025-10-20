@@ -11,6 +11,6 @@ manifest:
       import: app/west.yml
     - name: zmk-driver-paw3222-alpha3
       remote: tyama1531-lab
-      revision: feat/paw3222-sleep
+      revision: main
   self:
     path: config
