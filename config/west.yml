@@ -11,7 +11,7 @@ manifest:
       import: app/west.yml
     - name: zmk-driver-paw3222-alpha3
       remote: tyama1531-lab
-      revision: fix/paw3222-idle-300
+      revision: main
   self:
     path: config
 
