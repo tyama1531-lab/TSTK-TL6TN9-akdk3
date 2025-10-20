@@ -26,10 +26,13 @@ jobs:
 
       - name: Initialize and update west
         run: |
-          # Prefer the manifest stored at config/west.yml in this repository
+          # If config/west.yml exists as a plain file, west init -m will try to git-clone it and fail.
+          # Workaround: copy it to top-level west.yml and use local init (-l).
           if [ -f config/west.yml ]; then
-            echo 'Found local manifest at config/west.yml'
-            west init -m config/west.yml . || true
+            echo 'Found local manifest at config/west.yml; copying to top-level west.yml for west init -l'
+            cp config/west.yml west.yml
+            west init -l . || true
+            rm -f west.yml || true
           elif [ -f west.yml ]; then
             echo 'Found top-level west.yml, using local init'
             west init -l . || true
