@@ -24,3 +24,117 @@ USB-C cable|1|
 |Choc V2 switch and Choc socket|8|
 |Diode|66|
 |Keycap|66|
+
+## Features
+
+### PAW3222 Trackball Support
+
+This keyboard includes PAW3222 trackball support on the right side with advanced power management features:
+
+#### 🔋 Power Management
+- **Idle Timeout**: Automatic sleep mode after 5 seconds of inactivity
+- **Reduced Scan**: Lower power consumption during inactive periods  
+- **Power Control**: Hardware-level sensor sleep/wake support
+
+#### ⚙️ Configuration Options
+
+The following configuration options are available in `boards/shields/tstk_tl6tn9/tstk_tl6tn9_right.conf`:
+
+```properties
+# PAW3222 Idle and Power Management
+CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=5     # Idle timeout (seconds)
+CONFIG_PAW3222_REDUCED_SCAN=y             # Enable reduced scanning
+CONFIG_PAW3222_REDUCED_SCAN_MS=100        # Scan interval during reduced mode (ms)
+CONFIG_PAW3222_POWER_CTRL=y               # Enable hardware power control
+```
+
+#### 📊 Default Settings
+
+| Setting | Value | Description |
+|---------|-------|-------------|
+| `IDLE_TIMEOUT_SECONDS` | 5 | Time until idle mode activation |
+| `REDUCED_SCAN` | Enabled | Motion timer optimization |
+| `REDUCED_SCAN_MS` | 100ms | Polling interval during reduced scan |
+| `POWER_CTRL` | Enabled | Hardware sleep/wake control |
+
+#### 🔧 Customization
+
+To modify power management behavior:
+
+1. Edit `boards/shields/tstk_tl6tn9/tstk_tl6tn9_right.conf`
+2. Adjust the CONFIG values according to your preferences
+3. Rebuild firmware with `west build`
+
+**Example for longer battery life:**
+```properties
+CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=10    # Longer idle timeout
+CONFIG_PAW3222_REDUCED_SCAN_MS=200        # Slower scanning
+```
+
+**Example for maximum responsiveness:**
+```properties
+CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS=30    # Minimal idle timeout
+CONFIG_PAW3222_REDUCED_SCAN_MS=50         # Faster scanning
+```
+
+## Building
+
+This firmware uses ZMK with west build system and includes a custom PAW3222 driver.
+
+### Prerequisites
+- West build environment
+- ZMK development setup
+
+### Build Commands
+```bash
+# Build left side firmware
+west build -b akdk_bt1 -- -DSHIELD=tstk_tl6tn9_left
+
+# Build right side firmware  
+west build -b akdk_bt1 -- -DSHIELD=tstk_tl6tn9_right
+
+# Settings reset firmware
+west build -b akdk_bt1 -- -DSHIELD=settings_reset
+```
+
+### CI/CD
+GitHub Actions automatically builds firmware on push/PR:
+- Left side: `tstk_tl6tn9_left-akdk_bt1-zmk.uf2`
+- Right side: `tstk_tl6tn9_right-akdk_bt1-zmk.uf2`  
+- Settings reset: `settings_reset-akdk_bt1-zmk.uf2`
+
+## Troubleshooting
+
+### PAW3222 Power Management
+
+**Issue: Trackball not responding after idle**
+- Check `CONFIG_PAW3222_POWER_CTRL=y` is enabled
+- Verify idle timeout settings
+- Monitor logs for power state transitions
+
+**Issue: Battery drain too high**
+- Increase `CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS`
+- Increase `CONFIG_PAW3222_REDUCED_SCAN_MS`
+- Ensure `CONFIG_PAW3222_REDUCED_SCAN=y`
+
+**Issue: Trackball response too slow**
+- Decrease `CONFIG_PAW3222_REDUCED_SCAN_MS` 
+- Decrease `CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS`
+
+### Debugging
+
+Enable debug logging in your `.conf` file:
+```properties
+CONFIG_ZMK_LOG_LEVEL_DBG=y
+CONFIG_ZMK_USB_LOGGING=y
+```
+
+Look for PAW3222 log messages:
+- `PAW32XX: idle timeout reached, entering idle`
+- `PAW32XX: motion detected while idle -> waking up`
+- `PAW32XX: sensor set to sleep`
+- `PAW32XX: sensor wake request succeeded`
+
+## License
+
+[License information here]
