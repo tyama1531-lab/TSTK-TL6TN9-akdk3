@@ -1,12 +1,18 @@
 name: Upload autoconf artifacts
 
+# Trigger automatically only when the Build ZMK firmware workflow completes,
+# or when manually dispatched. Avoid running on raw push to prevent duplicate
+# builds/artifacts.
 on:
+  workflow_run:
+    workflows: ["Build ZMK firmware"]
+    types: [completed]
   workflow_dispatch:
 
 jobs:
   upload-autoconf:
+    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
-    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
     strategy:
       matrix:
         board: ["tstk_tl6tn9_left", "tstk_tl6tn9_right"]
