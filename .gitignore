@@ -1,6 +1,12 @@
 # Ignore local zmk clone created for development and patching
 zmk/
 
+# Ignore west workspace files (only needed for CI)
+.west/
+zephyr/
+modules/
+zmk-driver-paw3222-alpha3/
+
 # Keep common build artifacts ignored as well
 build/
 out/

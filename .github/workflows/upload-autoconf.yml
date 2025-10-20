@@ -1,12 +1,18 @@
 name: Upload autoconf artifacts
 
+# Trigger automatically only when the Build ZMK firmware workflow completes,
+# or when manually dispatched. Avoid running on raw push to prevent duplicate
+# builds/artifacts.
 on:
+  workflow_run:
+    workflows: ["Build ZMK firmware"]
+    types: [completed]
   workflow_dispatch:
 
 jobs:
   upload-autoconf:
+    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
-    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
     strategy:
       matrix:
         board: ["tstk_tl6tn9_left", "tstk_tl6tn9_right"]
@@ -20,165 +26,35 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install west and cmake
+      - name: Download artifacts from triggering run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          BOARD: ${{ matrix.board }}
         run: |
-          python -m pip install --upgrade pip
-          # Install west and zephyr from upstream to ensure 'west build' command is available
-          pip install --upgrade git+https://github.com/zephyrproject-rtos/west.git
-          pip install --upgrade git+https://github.com/zephyrproject-rtos/zephyr.git || true
-          sudo apt-get update -y
-          sudo apt-get install -y build-essential cmake ninja-build
-
-      - name: Initialize west
-        run: |
-          # Initialize west using upstream ZMK manifest if no local west.yml exists
-          INIT_OK=0
-          if [ -f west.yml ]; then
-            echo 'Found local west.yml, using west init -l .'
-            if west init -l .; then
-              INIT_OK=1
-            fi
-          else
-            echo 'No local west.yml, attempting west init -m https://github.com/zmkfirmware/zmk'
-            if west init -m https://github.com/zmkfirmware/zmk .; then
-              echo 'west init -m succeeded'
-              INIT_OK=1
+          echo "Looking for artifacts for run $RUN_ID"
+          API_URL="https://api.github.com/repos/$REPO/actions/runs/$RUN_ID/artifacts"
+          echo "Querying $API_URL"
+          artifacts_json=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "$API_URL")
+          echo "$artifacts_json" | jq '.artifacts | length as $len | "Found: "+($len|tostring)' || true
+          # Try to find artifact named autoconf-<board>
+          target_name="autoconf-${{ matrix.board }}"
+          artifact_id=$(echo "$artifacts_json" | jq -r --arg name "$target_name" '.artifacts[] | select(.name==$name) | .id' | head -n1)
+          if [ -n "$artifact_id" ] && [ "$artifact_id" != "null" ]; then
+            echo "Found artifact id $artifact_id for $target_name"
+            dl_url="https://api.github.com/repos/$REPO/actions/artifacts/$artifact_id/zip"
+            outfile="${target_name}.zip"
+            curl -L -s -H "Authorization: token $GITHUB_TOKEN" -o "$outfile" "$dl_url"
+            if [ -f "$outfile" ]; then
+              unzip -o "$outfile" -d extracted || true
+              ls -la extracted || true
             else
-              echo 'west init -m failed; inspecting cloned manifest repository (.west/manifest-tmp)'
-              if [ -d .west/manifest-tmp ]; then
-                echo 'Contents of .west/manifest-tmp:'
-                ls -la .west/manifest-tmp || true
-                echo 'Searching for *.yml inside manifest-tmp (top 3 levels)'
-                find .west/manifest-tmp -maxdepth 3 -type f -name '*.yml' -print || true
-                candidate=$(find .west/manifest-tmp -maxdepth 3 -type f -name 'west.yml' -print -quit || true)
-                if [ -n "$candidate" ]; then
-                  echo "Found candidate manifest: $candidate"
-                  echo 'Removing partially-created .west and retrying with candidate manifest'
-                  rm -rf .west || true
-                  if west init -m "$candidate" .; then
-                    INIT_OK=1
-                  fi
-                else
-                  echo 'No west.yml found in manifest-tmp; attempting raw download fallback'
-                  mkdir -p /tmp/west-manifest
-                  if curl -fsSL -o /tmp/west-manifest/west.yml https://raw.githubusercontent.com/zmkfirmware/zmk/main/west.yml; then
-                    ls -la /tmp/west-manifest || true
-                    rm -rf .west || true
-                    if west init -m /tmp/west-manifest/west.yml .; then
-                      INIT_OK=1
-                    fi
-                  else
-                    echo 'Fallback manifest download failed; will not run west update'
-                  fi
-                fi
-              else
-                echo '.west/manifest-tmp not present; attempting raw download fallback'
-                mkdir -p /tmp/west-manifest
-                if curl -fsSL -o /tmp/west-manifest/west.yml https://raw.githubusercontent.com/zmkfirmware/zmk/main/west.yml; then
-                  ls -la /tmp/west-manifest || true
-                  rm -rf .west || true
-                  if west init -m /tmp/west-manifest/west.yml .; then
-                    INIT_OK=1
-                  fi
-                else
-                  echo 'Fallback manifest download failed; will not run west update'
-                fi
-              fi
+              echo "Download failed for $target_name"
             fi
-          fi
-          if [ "$INIT_OK" -eq 1 ]; then
-            echo 'west init succeeded; running west update'
-            west update || true
           else
-            echo 'west init failed; skipping west update'
-          fi
-
-      - name: Install Zephyr Python requirements and verify west
-        run: |
-          # Install zephyr python requirements (may exist after west update)
-          if [ -d zephyr ]; then
-            python -m pip install --upgrade pip
-            if [ -f zephyr/scripts/requirements-base.txt ]; then
-              pip install -r zephyr/scripts/requirements-base.txt || true
-            fi
-            if [ -f zephyr/scripts/requirements.txt ]; then
-              pip install -r zephyr/scripts/requirements.txt || true
-            fi
-          fi
-          echo '--- west version and commands (after init/update) ---'
-          which west || true
-          python -m pip show west || true
-          west --version || true
-          # ensure ZEPHYR_BASE is set so west loads zephyr extensions
-          echo "ZEPHYR_BASE=$(pwd)/zephyr" >> $GITHUB_ENV
-          echo "ZEPHYR_BASE=$(pwd)/zephyr"
-          west help || true
-
-      - name: Debug west and workspace
-        run: |
-          echo '--- debug: which/pip show/freeze ---'
-          which west || true
-          python -m pip show west || true
-          python -m pip show zephyr || true
-          echo '--- pip freeze (top 200 lines) ---'
-          python -m pip freeze | head -n 200 || true
-          echo '--- .west and zephyr tree ---'
-          ls -la .west || true
-          if [ -d zephyr ]; then
-            ls -la zephyr || true
-            ls -la zephyr/scripts || true
-          fi
-          if [ -f .west/manifest.yml ]; then
-            echo '--- .west/manifest.yml ---'; cat .west/manifest.yml || true
-          fi
-          echo '--- west list/config/topdir ---'
-          west list || true
-          west config || true
-          west topdir || true
-
-      - name: Build firmware (generate autoconf)
-        working-directory: .
-        run: |
-          # Adjust board names if your board folder uses different naming
-          west build -b ${{ matrix.board }} -s . -d build-${{ matrix.board }} 2>&1 | tee build-${{ matrix.board }}.log || true
-
-      - name: List build directory (for debugging)
-        run: |
-          echo "Listing build directory for ${{ matrix.board }}"
-          ls -la build-${{ matrix.board }} || true
-          ls -la build-${{ matrix.board }}/zephyr || true
-
-      - name: Find autoconf.h and other generated files
-        run: |
-          echo "Searching for autoconf.h under build-${{ matrix.board }}"
-          find build-${{ matrix.board }} -type f -name autoconf.h -print || true
-          echo "Listing any generated include directories"
-          find build-${{ matrix.board }} -type d -name generated -print || true
-
-      - name: Archive build directory (debug)
-        run: |
-          zip -r build-${{ matrix.board }}-debug.zip build-${{ matrix.board }} || true
-
-      - name: Fallback: clone zephyr and build with CMake/Ninja if autoconf.h missing
-        run: |
-          AUTOCONF=build-${{ matrix.board }}/zephyr/include/generated/autoconf.h
-          if [ -f "$AUTOCONF" ]; then
-            echo "autoconf.h already exists at $AUTOCONF, skipping fallback"
-            exit 0
-          fi
-          echo "autoconf.h not found, running fallback: clone zephyr and build via cmake"
-          if [ ! -d zephyr ]; then
-            git clone --depth 1 https://github.com/zephyrproject-rtos/zephyr.git zephyr
-          fi
-          echo "ZEPHYR_BASE=$(pwd)/zephyr" >> $GITHUB_ENV
-          echo "ZEPHYR_BASE=$(pwd)/zephyr"
-          mkdir -p build-${{ matrix.board }}
-          cmake -S . -B build-${{ matrix.board }} -GNinja -DBOARD=${{ matrix.board }} -DZEPHYR_BASE=$ZEPHYR_BASE || true
-          ninja -C build-${{ matrix.board }} || true
-          if [ -f "$AUTOCONF" ]; then
-            echo "autoconf.h generated by fallback"
-          else
-            echo "fallback did not produce autoconf.h"
+            echo "Artifact $target_name not found in run $RUN_ID"
           fi
 
       - name: Archive workspace (always include for debugging)
