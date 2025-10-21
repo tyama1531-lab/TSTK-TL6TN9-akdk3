@@ -122,9 +122,12 @@ GitHub Actionsが push/PR 時に自動的にファームウェアをビルドし
 - `CONFIG_PAW3222_IDLE_TIMEOUT_SECONDS` を減らす
 
 ### デバッグ
+.conf` ファイルでデバッグログを有効化：
 
-`.conf` ファイルでデバッグログを有効化：
+注: このリポジトリではログ設定は共通設定ファイル `config/prj.conf` に集約されています。個別のシールド設定（`boards/shields/.../*.conf`）で上書きすることも可能ですが、基本は `config/prj.conf` を編集してください。
+
 ```properties
+# 有効にする場合（例）
 CONFIG_ZMK_LOG_LEVEL_DBG=y
 CONFIG_ZMK_USB_LOGGING=y
 ```
