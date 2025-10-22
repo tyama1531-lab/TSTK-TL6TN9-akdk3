@@ -1,0 +1,17 @@
+/* Minimal behaviors for Ctrl+PageUp / Ctrl+PageDown used by keymap testing */
+
+/ {
+    behaviors {
+        compatible = "zmk,behaviors";
+
+        ctrl_pgup: ctrl_pgup {
+            label = "CTRL_PGUP";
+            bindings = <&kp LCTL &kp PAGE_UP>;
+        };
+
+        ctrl_pgdn: ctrl_pgdn {
+            label = "CTRL_PGDN";
+            bindings = <&kp LCTL &kp PAGE_DOWN>;
+        };
+    };
+};
