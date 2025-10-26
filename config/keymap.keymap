@@ -3,15 +3,23 @@
 #include <dt-bindings/zmk/mouse.h>
 
 / {
-/*
+    /* Inline minimal behaviors for Ctrl+PageUp / Ctrl+PageDown
+       Placed here to avoid adding new files and to ensure the
+       labels are visible to both local and CI builds. */
     behaviors {
-        paw_mode: paw_mode {
-            compatible = "paw32xx,mode";
-            label = "PAW_MODE";
-            #binding-cells = <1>;
+        compatible = "zmk,behaviors";
+
+        ctrl_pgup: ctrl_pgup {
+            label = "CTRL_PGUP";
+            bindings = <&kp LCTL &kp PAGE_UP>;
+        };
+
+        ctrl_pgdn: ctrl_pgdn {
+            label = "CTRL_PGDN";
+            bindings = <&kp LCTL &kp PAGE_DOWN>;
         };
     };
-*/
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -25,15 +33,15 @@
             >;
         };
 
-        layer_1 {
-            bindings = <
+    layer_1 {
+        bindings = <
     /* 1行 */ &kp ESC   &kp F1         &kp F2         &kp F3    &kp F4    &kp F5                &kp F6      &kp F7    &kp F8     &kp F9    &kp F10     &none     &none     &kp GRAVE
     /* 2行 */ &none     &none          &kp UP         &none     &kp PGUP  &none                 &none       &none     &none      &none     &none       &none     &none     &kp DELETE
     /* 3行 */ &kp LCTRL &kp LEFT       &kp DOWN       &kp RIGHT &kp PGDN  &none                 &kp HOME    &kp END   &none      &none     &none       &none     &none
-    /* 4行 */ &kp LSHFT &none          &none          &none     &none     &mo 4                 &none       &none     &none      &none     &none       &none     &kp F7
+    /* 4行 */ &kp LSHFT &ctrl_pgup     &ctrl_pgdn     &none     &none     &mo 4                 &none       &none     &none      &none     &none       &none     &kp F7
     /* 5行 */           &none          &kp LALT       &kp LGUI  &kp SPACE &kp DELETE &none      &none       &none     &none      &none     &none       &none
-            >;
-        };
+        >;
+    };
 
         layer_2 {
             bindings = <
