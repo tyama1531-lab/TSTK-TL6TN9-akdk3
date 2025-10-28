@@ -17,21 +17,21 @@
 
         layer_0 {
             bindings = <
-    /* 1行 */ &kp ESC   &kp N1   &kp N2   &kp N3     &kp N4    &kp N5                          &kp N6      &kp N7   &kp N8    &kp N9    &kp N0      &kp MINUS &kp EQUAL  &kp CAPS
-    /* 2行 */ &kp TAB   &kp Q    &kp W    &kp E      &kp R     &kp T                           &kp Y       &kp U    &kp I     &kp O     &kp P       &kp LBKT  &kp RBKT   &kp BSPC
-    /* 3行 */ &kp LCTRL &kp A    &kp S    &kp D      &kp F     &kp G                           &kp H       &kp J    &kp K     &kp L     &kp SEMI    &kp SQT   &kp ENTER
-    /* 4行 */ &kp LSHFT &kp Z    &kp X    &kp C      &kp V     &kp B                           &kp N       &kp M    &kp COMMA &kp DOT   &kp FSLH    &kp RSHFT &kp F10
-    /* 5行 */           &kp LGUI &kp LALT &kp INSERT &kp SPACE &kp ESC   &mo 3     &mo 1       &mo 2    &kp SPACE &kp CAPS  &kp LS(F10) &mo 4
+    /* 1行 */ &kp ESC   &kp N1   &kp N2     &kp N3     &kp N4    &kp N5                          &kp N6      &kp N7    &kp N8    &kp N9      &kp N0      &kp MINUS &kp EQUAL  &kp CAPS
+    /* 2行 */ &kp TAB   &kp Q    &kp W      &kp E      &kp R     &kp T                           &kp Y       &kp U     &kp I     &kp O       &kp P       &kp LBKT  &kp RBKT   &kp BSPC
+    /* 3行 */ &kp LCTRL &kp A    &kp S      &kp D      &kp F     &kp G                           &kp H       &kp J     &kp K     &kp L       &kp SEMI    &kp SQT   &kp ENTER
+    /* 4行 */ &kp LSHFT &kp Z    &kp X      &kp C      &kp V     &kp B                           &kp N       &kp M     &kp COMMA &kp DOT     &kp FSLH    &kp RSHFT &kp F10
+    /* 5行 */ &kp LGUI  &kp LALT &kp INSERT &kp SPACE  &kp ESC   &mo 3               &mo 1       &mo 2       &kp SPACE &kp CAPS  &kp LS(F10) &mo 4
             >;
         };
 
         layer_1 {
             bindings = <
-    /* 1行 */ &kp ESC   &kp F1   &kp F2   &kp F3    &kp F4    &kp F5                            &kp F6      &kp F7    &kp F8     &kp F9    &kp F10     &none     &none     &kp GRAVE
-    /* 2行 */ &none     &none    &kp UP   &none     &kp PGUP  &none                             &none       &none     &none      &none     &none       &none     &none     &kp DELETE
-    /* 3行 */ &kp LCTRL &kp LEFT &kp DOWN &kp RIGHT &kp PGDN  &none                             &kp HOME    &kp END   &none      &none     &none       &none     &none
-    /* 4行 */ &kp LSHFT &none    &none    &none     &mo 5     &mo 4                             &none       &none     &none      &none     &none       &none     &kp F7
-    /* 5行 */           &kp LGUI &kp LALT &kp CAPS  &kp SPACE &kp DELETE &none      &none       &none     &none      &none     &none       &none
+    /* 1行 */ &kp ESC   &kp F1   &kp F2   &kp F3    &kp F4     &kp F5                            &kp F6      &kp F7    &kp F8     &kp F9    &kp F10     &none     &none     &kp GRAVE
+    /* 2行 */ &none     &none    &kp UP   &none     &kp PGUP   &none                             &none       &none     &none      &none     &none       &none     &none     &kp DELETE
+    /* 3行 */ &kp LCTRL &kp LEFT &kp DOWN &kp RIGHT &kp PGDN   &none                             &kp HOME    &kp END   &none      &none     &none       &none     &none
+    /* 4行 */ &kp LSHFT &none    &none    &none     &mo 5      &mo 4                             &none       &none     &none      &none     &none       &none     &kp F7
+    /* 5行 */ &kp LGUI  &kp LALT &kp CAPS &kp SPACE &kp DELETE &none                 &none       &none       &none     &none      &none     &none
             >;
         };
 
@@ -41,7 +41,7 @@
     /* 2行 */ &none     &none      &kp UP   &none     &none      &none                           &none      &none     &none      &none     &none       &none     &none     &kp DELETE
     /* 3行 */ &kp LCTRL &kp LEFT   &kp DOWN &kp RIGHT &none      &none                           &mkp LCLK  &mkp RCLK &none      &none     &none       &none     &none
     /* 4行 */ &kp LSHFT &none      &none    &none     &none      &none                           &mkp MCLK  &none     &none      &none     &none       &none     &kp F7
-    /* 5行 */           &none      &none    &none     &none      &none   &none       &none      &none     &none      &none     &none       &none
+    /* 5行 */ &none     &none     &none     &none     &none      &none                &none      &none      &none     &none      &none     &none
             >;
         };
 
@@ -51,7 +51,7 @@
     /* 2行 */ &none     &none      &kp UP   &none     &none      &none                           &none       &none     &none      &none     &none       &none     &none     &kp DELETE
     /* 3行 */ &kp LCTRL &kp LEFT   &kp DOWN &kp RIGHT &none      &none                           &mkp LCLK   &mkp RCLK &none      &none     &none       &none     &none
     /* 4行 */ &kp LSHFT &none      &none    &none     &none      &mo 4                           &mkp MCLK   &none     &none      &none     &none       &none     &kp F7
-    /* 5行 */           &none      &none    &none     &none      &none   &none       &none       &none     &none      &none     &none       &none
+    /* 5行 */ &none     &none     &none     &none     &none      &none               &none       &none       &none     &none      &none     &none
             >;
         };
 
@@ -61,7 +61,7 @@
     /* 2行 */ &none     &none      &kp UP   &none     &none      &none                           &none       &none     &none      &none     &none       &none     &none     &kp DELETE
     /* 3行 */ &kp LCTRL &kp LEFT   &kp DOWN &kp RIGHT &none      &none                           &mkp LCLK   &mkp RCLK &none      &none     &none       &none     &none
     /* 4行 */ &kp LSHFT &none      &none    &none     &none      &none                           &mkp MCLK   &none     &none      &none     &none       &none     &kp F7
-    /* 5行 */           &none      &none    &none     &none      &none   &none       &none       &none     &none      &none     &none       &none
+    /* 5行 */ &none     &none      &none    &none     &none      &none               &none       &none       &none     &none      &none     &none
             >;
         };
 
@@ -71,7 +71,7 @@
     /* 2行 */ &none     &none      &none    &none     &none      &none                           &kp N7      &kp N8    &kp N9     &none     &none       &none     &none     &kp DELETE
     /* 3行 */ &kp LCTRL &none      &none    &none     &none      &none                           &kp N4      &kp N5    &kp N6     &none     &none       &none     &none
     /* 4行 */ &kp LSHFT &none      &none    &none     &none      &none                           &kp N1      &kp N2    &kp N3     &none     &none       &none     &kp F7
-    /* 5行 */           &none      &none    &none     &none      &none   &none       &kp N0      &kp N0    &none      &none     &none       &none
+    /* 5行 */ &none     &none      &none    &none     &none      &none               &kp N0      &kp N0      &none     &none      &none     &none
             >;
         };
     };
