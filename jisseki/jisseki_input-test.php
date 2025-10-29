@@ -724,7 +724,9 @@ session_start();
           
           document.write(input_namecode);
           
-        document.write('</form>');
+  document.write('</form>');
+  
+  
       }
     </script>
     
@@ -741,6 +743,14 @@ session_start();
     <div style="position:absolute; left:15px; top:640px; font-size:14px;"><a href="http://172.21.110.106/resource/実績収集システム_マニュアル.pdf" target="_blank">マニュアルを開く</a></div>
 
     <script type="text/javascript">
+      // グローバルにPHP生成のJSON配列を割当（IEモードでの文字列埋め込み問題を回避）
+      var commonidlist  = <?php echo  $json_common_id_list; ?>;
+      var commonlist    = <?php echo  $json_common_list; ?>;
+      var modelidlist   = <?php echo  $json_model_id_list; ?>;
+      var modellist     = <?php echo  $json_model_list; ?>;
+      var clientidlist  = <?php echo  $json_client_id_list; ?>;
+      var clientlist    = <?php echo  $json_client_list; ?>;
+
       function regist_data()
       {
         var limityear  = 2025;
@@ -749,12 +759,7 @@ session_start();
         
         var limitdaycode = limityear * 12 * 31 + limitmonth * 31 + limitday * 1;
         
-        var commonidlist  = JSON.parse('<?php echo  $json_common_id_list; ?>');
-        var commonlist    = JSON.parse('<?php echo  $json_common_list; ?>');
-        var modelidlist   = JSON.parse('<?php echo  $json_model_id_list; ?>');
-        var modellist     = JSON.parse('<?php echo  $json_model_list; ?>');
-        var clientidlist  = JSON.parse('<?php echo  $json_client_id_list; ?>');
-        var clientlist    = JSON.parse('<?php echo  $json_client_list; ?>');
+    // (modellist 等はグローバル変数として上部で定義済み)
         
         var model_list_no = new Array(8);
         var model_id_list = new Array(8);
@@ -1314,13 +1319,14 @@ session_start();
         
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          // サーバで生成したJSON配列を既にmodellistとして定義しているので参照する
+          var model_list = modellist;
           document.getElementById("clientlist1").selectedIndex  = 0;
           document.getElementById("after_mp_task1").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("after_mp_task1").disabled = true;
           document.getElementById("after_mp_task1").checked  = false;
         }
@@ -1362,13 +1368,13 @@ session_start();
         
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist2").selectedIndex  = 0;
           document.getElementById("after_mp_task2").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("after_mp_task2").disabled = true;
           document.getElementById("after_mp_task2").checked  = false;
         }
@@ -1410,13 +1416,13 @@ session_start();
         
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist3").selectedIndex  = 0;
           document.getElementById("after_mp_task3").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("after_mp_task3").disabled = true;
           document.getElementById("after_mp_task3").checked  = false;
         }
@@ -1458,13 +1464,13 @@ session_start();
         
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist4").selectedIndex  = 0;
           document.getElementById("after_mp_task4").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("after_mp_task4").disabled = true;
           document.getElementById("after_mp_task4").checked  = false;
         }
@@ -1506,13 +1512,13 @@ session_start();
         
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist5").selectedIndex  = 0;
           document.getElementById("after_mp_task5").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("after_mp_task5").disabled = true;
           document.getElementById("after_mp_task5").checked  = false;
         }
@@ -1554,26 +1560,26 @@ session_start();
         
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist6").selectedIndex  = 0;
           document.getElementById("after_mp_task6").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("after_mp_task6").disabled = true;
           document.getElementById("after_mp_task6").checked  = false;
         }
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist6").disabled = true;
           document.getElementById("clientlist6").selectedIndex  = 0;
           document.getElementById("after_mp_task6").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("clientlist6").disabled = false;
           document.getElementById("after_mp_task6").disabled = true;
           document.getElementById("after_mp_task6").checked  = false;
@@ -1615,26 +1621,26 @@ session_start();
         
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist7").selectedIndex  = 0;
           document.getElementById("after_mp_task7").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("after_mp_task7").disabled = true;
           document.getElementById("after_mp_task7").checked  = false;
         }
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist7").disabled = true;
           document.getElementById("clientlist7").selectedIndex  = 0;
           document.getElementById("after_mp_task7").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("clientlist7").disabled = false;
           document.getElementById("after_mp_task7").disabled = true;
           document.getElementById("after_mp_task7").checked  = false;
@@ -1676,26 +1682,26 @@ session_start();
         
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist8").selectedIndex  = 0;
           document.getElementById("after_mp_task8").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("after_mp_task8").disabled = true;
           document.getElementById("after_mp_task8").checked  = false;
         }
         if(radioElements[0].checked)
         {
-          var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+          var model_list = modellist;
           document.getElementById("clientlist8").disabled = true;
           document.getElementById("clientlist8").selectedIndex  = 0;
           document.getElementById("after_mp_task8").disabled = false;
         }
         else
         {
-          var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+          var model_list = commonlist;
           document.getElementById("clientlist8").disabled = false;
           document.getElementById("after_mp_task8").disabled = true;
           document.getElementById("after_mp_task8").checked  = false;
@@ -1749,9 +1755,9 @@ session_start();
     <script type="text/javascript">
       var radio_sel = <?php echo $am1_radio; ?>;
       if (radio_sel == 0)
-        var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+        var model_list = modellist;
       else
-        var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+        var model_list = commonlist;
         
       var select = document.getElementById('modellist1');
       var cnt = model_list.length;
@@ -1767,9 +1773,9 @@ session_start();
       }
       var radio_sel = <?php echo $am2_radio; ?>;
       if (radio_sel == 0)
-        var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+        var model_list = modellist;
       else
-        var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+        var model_list = commonlist;
       
       var select = document.getElementById('modellist2');
       var cnt = model_list.length;
@@ -1785,9 +1791,9 @@ session_start();
       }
       var radio_sel = <?php echo $am3_radio; ?>;
       if (radio_sel == 0)
-        var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+        var model_list = modellist;
       else
-        var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+        var model_list = commonlist;
       
       var select = document.getElementById('modellist3');
       var cnt = model_list.length;
@@ -1803,9 +1809,9 @@ session_start();
       }
       var radio_sel = <?php echo $pm1_radio; ?>;
       if (radio_sel == 0)
-        var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+        var model_list = modellist;
       else
-        var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+        var model_list = commonlist;
       
       var select = document.getElementById('modellist4');
       var cnt = model_list.length;
@@ -1821,9 +1827,9 @@ session_start();
       }
       var radio_sel = <?php echo $pm2_radio; ?>;
       if (radio_sel == 0)
-        var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+        var model_list = modellist;
       else
-        var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+        var model_list = commonlist;
       
       var select = document.getElementById('modellist5');
       var cnt = model_list.length;
@@ -1839,9 +1845,9 @@ session_start();
       }
       var radio_sel = <?php echo $pm3_radio; ?>;
       if (radio_sel == 0)
-        var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+        var model_list = modellist;
       else
-        var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+        var model_list = commonlist;
       
       var select = document.getElementById('modellist6');
       var cnt = model_list.length;
@@ -1857,9 +1863,9 @@ session_start();
       }
       var radio_sel = <?php echo $ot1_radio; ?>;
       if (radio_sel == 0)
-        var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+        var model_list = modellist;
       else
-        var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+        var model_list = commonlist;
       
       var select = document.getElementById('modellist7');
       var cnt = model_list.length;
@@ -1875,9 +1881,9 @@ session_start();
       }
       var radio_sel = <?php echo $ot2_radio; ?>;
       if (radio_sel == 0)
-        var model_list = JSON.parse('<?php echo  $json_model_list; ?>');
+        var model_list = modellist;
       else
-        var model_list = JSON.parse('<?php echo  $json_common_list; ?>');
+        var model_list = commonlist;
       
       var select = document.getElementById('modellist8');
       var cnt = model_list.length;
@@ -1893,8 +1899,8 @@ session_start();
       }
       
       
-      //OEMリストの設定
-      var client_list = JSON.parse('<?php echo  $json_client_list; ?>');
+  //OEMリストの設定
+  var client_list = clientlist;
       var select = document.getElementById('clientlist1');
       var cnt = client_list.length;
       for (var i=0; i<cnt; i++)
@@ -2060,5 +2066,6 @@ session_start();
       var options8 = document.getElementById('clientlist8').options;
       options8[client_ot2].selected = true;
     </script>
+    <!-- debug removed -->
   </body>
 </html>
