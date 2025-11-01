@@ -18,12 +18,12 @@
 
         layer_0 {
             bindings = <
-    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]  [Col_R4]  [Col_R5]    [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
-    /* [Row_1] */ &kp ESC   &kp N1   &kp N2     &kp N3     &kp N4    &kp N5                          &kp N6      &kp N7    &kp N8    &kp N9      &kp N0      &kp MINUS &kp EQUAL  &kp CAPS
-    /* [Row_2] */ &kp TAB   &kp Q    &kp W      &kp E      &kp R     &kp T                           &kp Y       &kp U     &kp I     &kp O       &kp P       &kp LBKT  &kp RBKT   &kp BSPC
-    /* [Row_3] */ &kp LCTRL &kp A    &kp S      &kp D      &kp F     &kp G                           &kp H       &kp J     &kp K     &kp L       &kp SEMI    &kp SQT   &kp ENTER
-    /* [Row_4] */ &kp LSHFT &kp Z    &kp X      &kp C      &kp V     &kp B                           &kp N       &kp M     &kp COMMA &kp DOT     &kp FSLH    &kp RSHFT &kp F10
-    /* [Row_5] */ &kp LGUI  &kp LALT &kp INSERT &kp SPACE  &kp ESC   &mo 3               &mo 1       &mo 2       &kp SPACE &kp CAPS  &kp LS(F10) &mo 4
+    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]    [Col_R4]     [Col_R5]     [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
+    /* [Row_1] */ &kp ESC   &kp N1   &kp N2     &kp N3     &kp N4    &kp N5                          &kp N6      &kp N7      &kp N8       &kp N9       &kp N0      &kp MINUS &kp EQUAL  &kp CAPS
+    /* [Row_2] */ &kp TAB   &kp Q    &kp W      &kp E      &kp R     &kp T                           &kp Y       &kp U       &kp I        &kp O        &kp P       &kp LBKT  &kp RBKT   &kp BSPC
+    /* [Row_3] */ &kp LCTRL &kp A    &kp S      &kp D      &kp F     &kp G                           &kp H       &kp J       &kp K        &kp L        &kp SEMI    &kp SQT   &kp ENTER
+    /* [Row_4] */ &kp LSHFT &kp Z    &kp X      &kp C      &kp V     &kp B                           &kp N       &kp M       &kp COMMA    &kp DOT      &kp FSLH    &kp RSHFT &kp F10
+    /* [Row_5] */ &kp LGUI  &kp LALT &kp INSERT &kp SPACE  &kp ESC   &mo 3               &mo 1       &mo 2       &kp SPACE   &kp CAPS     &kp LS(F10)  &mo 4
             >;
         };
 
@@ -40,45 +40,45 @@
 
         layer_2 {
             bindings = <
-    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]  [Col_R4]  [Col_R5]    [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
-    /* [Row_1] */ &kp ESC   &kp F13  &kp F14    &kp F15    &kp F16   &kp F17                         &kp F18      &kp F19  &kp F20   &kp F21     &kp F22     &kp F23   &kp F24    &kp BSLH
-    /* [Row_2] */ &kp TAB   &none    &kp UP     &none      &none     &none                           &none       &none     &none     &none       &none       &none     &none      &kp DELETE
-    /* [Row_3] */ &kp LCTRL &kp LEFT &kp DOWN   &kp RIGHT  &none     &none                           &mkp LCLK   &mkp RCLK &none     &none       &none       &none     &none
-    /* [Row_4] */ &kp LSHFT &none    &none      &none      &none     &none                           &mkp MCLK   &none     &none     &none       &none       &none     &kp F7
-    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &none        &none       &none     &none     &none       &none
+    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]    [Col_R4]     [Col_R5]     [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
+    /* [Row_1] */ &kp ESC   &kp F13  &kp F14    &kp F15    &kp F16   &kp F17                         &kp F18     &kp F19     &kp F20      &kp F21      &kp F22     &kp F23   &kp F24    &kp BSLH
+    /* [Row_2] */ &kp TAB   &none    &kp UP     &none      &none     &none                           &none       &none       &none        &none        &none       &none     &none      &kp DELETE
+    /* [Row_3] */ &kp LCTRL &kp LEFT &kp DOWN   &kp RIGHT  &none     &none                           &mkp LCLK   &mkp RCLK   &none        &none        &none       &none     &none
+    /* [Row_4] */ &kp LSHFT &none    &none      &none      &none     &none                           &mkp MCLK   &none       &none        &none        &none       &none     &kp F7
+    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &none        &none       &none       &none        &none        &none
             >;
         };
 
         layer_3 {   // SNIPEレイヤー
             bindings = <
-    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]  [Col_R4]  [Col_R5]    [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
-    /* [Row_1] */ &kp ESC   &kp F13  &kp F14    &kp F15    &kp F16   &kp F17                         &kp F18     &kp F19   &kp F20   &kp F21     &kp F22     &kp F23   &kp F24    &kp BSLH
-    /* [Row_2] */ &kp TAB   &none    &kp UP     &none      &none     &none                           &none       &none     &none     &none       &none       &none     &none      &kp DELETE
-    /* [Row_3] */ &kp LCTRL &kp LEFT &kp DOWN   &kp RIGHT  &none     &none                           &mkp LCLK   &mkp RCLK &none     &none       &none       &none     &none
-    /* [Row_4] */ &kp LSHFT &none    &none      &none      &mo 5     &mo 4                           &mkp MCLK   &none     &none     &none       &none       &none     &kp F7
-    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &none        &none       &none     &none     &none       &none
+    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]    [Col_R4]     [Col_R5]     [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
+    /* [Row_1] */ &kp ESC   &kp F13  &kp F14    &kp F15    &kp F16   &kp F17                         &kp F18     &kp F19     &kp F20      &kp F21      &kp F22     &kp F23   &kp F24    &kp BSLH
+    /* [Row_2] */ &kp TAB   &none    &kp UP     &none      &none     &none                           &none       &none       &none        &none        &none       &none     &none      &kp DELETE
+    /* [Row_3] */ &kp LCTRL &kp LEFT &kp DOWN   &kp RIGHT  &none     &none                           &mkp LCLK   &mkp RCLK   &none        &none        &none       &none     &none
+    /* [Row_4] */ &kp LSHFT &none    &none      &none      &mo 5     &mo 4                           &mkp MCLK   &none       &none        &none        &none       &none     &kp F7
+    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &none        &none       &none       &none        &none        &none
             >;
         };
 
         layer_4 {   // SCROLLレイヤー
             bindings = <
-    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]  [Col_R4]  [Col_R5]    [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
-    /* [Row_1] */ &none     &none    &none      &none      &none     &none                           &none       &none     &none      &none      &none        &none    &none      &kp BSLH
-    /* [Row_2] */ &none     &none    &kp UP     &none      &none     &none                           &none       &none     &none      &none      &none        &none    &none      &kp DELETE
-    /* [Row_3] */ &kp LCTRL &kp LEFT &kp DOWN   &kp RIGHT  &none     &none                           &mkp LCLK   &mkp RCLK &none      &none      &none        &none    &none
-    /* [Row_4] */ &kp LSHFT &none    &none      &none      &none     &none                           &mkp MCLK   &none     &none      &none      &none        &none    &kp F7
-    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &none        &none       &none     &none      &none      &none
+    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]    [Col_R4]     [Col_R5]     [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
+    /* [Row_1] */ &none     &none    &none      &none      &none     &none                           &none       &none       &none        &none        &none       &none     &none      &kp BSLH
+    /* [Row_2] */ &none     &none    &kp UP     &none      &none     &none                           &none       &none       &none        &none        &none       &none     &none      &kp DELETE
+    /* [Row_3] */ &kp LCTRL &kp LEFT &kp DOWN   &kp RIGHT  &none     &none                           &mkp LCLK   &mkp RCLK   &none        &none        &none       &none     &none
+    /* [Row_4] */ &kp LSHFT &none    &none      &none      &none     &none                           &mkp MCLK   &none       &none        &none        &none       &none     &kp F7
+    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &none        &none       &none       &none        &none        &none
             >;
         };
 
         layer_5 {   // テンキーレイヤー
             bindings = <
-    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]  [Col_R4]  [Col_R5]    [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
-    /* [Row_1] */ &none     &none    &none      &none      &none     &none                           &kp TAB     &kp FSLH  &kp STAR  &kp BSPC    &kp EQUAL   &none     &none      &kp BSLH
-    /* [Row_2] */ &none     &none    &none      &none      &none     &none                           &kp N7      &kp N8    &kp N9    &kp MINUS   &none       &none     &none      &kp DELETE
-    /* [Row_3] */ &kp LCTRL &none    &none      &none      &none     &none                           &kp N4      &kp N5    &kp N6    &kp PLUS    &none       &none     &kp ENTER
-    /* [Row_4] */ &kp LSHFT &none    &none      &none      &none     &none                           &kp N1      &kp N2    &kp N3    &kp DOT     &none       &none     &kp F7
-    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &kp N0       &kp N0      &none     &none     &none       &none
+    //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]    [Col_R4]     [Col_R5]     [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
+    /* [Row_1] */ &none     &none    &none      &none      &none     &none                           &kp TAB     &kp kp_FSLH  &kp kp_STAR &kp BSPC     &kp EQUAL   &none     &none      &kp BSLH
+    /* [Row_2] */ &none     &none    &none      &none      &none     &none                           &kp kp_7    &kp kp_8     &kp kp_9    &kp kp_MINUS &none       &none     &none      &kp DELETE
+    /* [Row_3] */ &kp LCTRL &none    &none      &none      &none     &none                           &kp kp_4    &kp kp_5     &kp kp_6    &kp kp_PLUS  &none       &none     &kp ENTER
+    /* [Row_4] */ &kp LSHFT &none    &none      &none      &none     &none                           &kp kp_1    &kp kp_2     &kp kp_3    &kp kp_DOT   &none       &none     &kp F7
+    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &kp kp_0     &kp kp_0    &none        &none       &none        &none
             >;
         };
     };
