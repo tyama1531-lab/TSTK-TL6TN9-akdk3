@@ -75,10 +75,10 @@
             bindings = <
     //            [Col_L1]  [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]  [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]     [Col_R4]        [Col_R5]     [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
     /* [Row_1] */ &none     &none    &none      &none      &none     &none                           &kp TAB     &kp KP_SLASH &kp KP_ASTERISK &kp BSPC     &kp EQUAL   &none     &none      &kp BSLH
-    /* [Row_2] */ &none     &none    &none      &none      &none     &none                           &kp kp_7    &kp kp_8     &kp kp_9        &kp KP_MINUS &none       &none     &none      &kp DELETE
-    /* [Row_3] */ &kp LCTRL &none    &none      &none      &none     &none                           &kp kp_4    &kp kp_5     &kp kp_6        &kp KP_PLUS  &none       &none     &kp ENTER
-    /* [Row_4] */ &kp LSHFT &none    &none      &none      &none     &none                           &kp kp_1    &kp kp_2     &kp kp_3        &kp KP_DOT   &none       &none     &kp F7
-    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &kp kp_0     &kp kp_0    &none        &none           &none        &none
+    /* [Row_2] */ &none     &none    &none      &none      &none     &none                           &kp KP_7    &kp KP_8     &kp KP_9        &kp KP_MINUS &none       &none     &none      &kp DELETE
+    /* [Row_3] */ &kp LCTRL &none    &none      &none      &none     &none                           &kp KP_4    &kp KP_5     &kp KP_6        &kp KP_PLUS  &none       &none     &kp ENTER
+    /* [Row_4] */ &kp LSHFT &none    &none      &none      &none     &none                           &kp KP_1    &kp KP_2     &kp KP_3        &kp KP_DOT   &none       &none     &kp F7
+    /* [Row_5] */ &none     &none    &none      &none      &none     &none              &kp KP_0     &kp KP_0    &none        &none           &none        &none
             >;
         };
     };
