@@ -77,13 +77,23 @@
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <META http-equiv="Content-Style-Type" content="text/css">
     
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
     <link rel="shortcut icon" href="favicon2.ico">
     <title>実績抽出(期間)</title>
     
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Fallbacks for intranet / IE-mode: load local copies if CDN blocked -->
+    <script>
+      if (typeof window.jQuery === 'undefined') {
+        document.write('<script src="jquery/jquery.min.js"><\/script>');
+      }
+      if (typeof $.datepicker === 'undefined') {
+        document.write('<link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">');
+        document.write('<script src="jquery-ui/jquery-ui.min.js"><\/script>');
+      }
+    </script>
     
     <script language="javascript" type="text/javascript" src="jquery/jquery.jqplot.min.js"></script>
     <script language="javascript" type="text/javascript" src="jquery/plugins/jqplot.pieRenderer.js"></script>
@@ -140,23 +150,23 @@
     <script>
       $(window).on('load', function() 
       {
-        $.datepicker.setDefaults( $.datepicker.regional[ "ja" ] );
-        $('.StrDate').datepicker(
-        {//クラス名を指定
-          showMonthAfterYear: false,
-          numberOfMonths: 3,
-          showButtonPanel: true,
-        });
-      });
-      $(window).on('load', function() 
-      {
-        $.datepicker.setDefaults( $.datepicker.regional[ "ja" ] );
-        $('.EndDate').datepicker(
-        {//クラス名を指定
-          showMonthAfterYear: false,
-          numberOfMonths: 3,
-          showButtonPanel: true,
-        });
+        try { if ($.datepicker && $.datepicker.regional && $.datepicker.regional['ja']) { $.datepicker.setDefaults($.datepicker.regional['ja']); } } catch(e){}
+        try {
+          if ($.datepicker) {
+            $('.StrDate').datepicker({
+              dateFormat: 'mm/dd/yy',
+              showMonthAfterYear: false,
+              numberOfMonths: 3,
+              showButtonPanel: true
+            });
+            $('.EndDate').datepicker({
+              dateFormat: 'mm/dd/yy',
+              showMonthAfterYear: false,
+              numberOfMonths: 3,
+              showButtonPanel: true
+            });
+          }
+        } catch(e) { /* ignore */ }
       });
     </script>
     
@@ -194,8 +204,9 @@
         enddate = "";
         
       document.write('<form id="fm" name="fm" method="post">');
-        document.write('<p>開始日：<input type="date" class="StrDate" id="StrDate" name="StrDate" style="width:100px" value="' + strdate + '" id="datepicker1" onchange="datepickerstrchange()"></p></p>');
-        document.write('<p>終了日：<input type="date" class="EndDate" id="EndDate" name="EndDate" style="width:100px" value="' + enddate + '" id="datepicker2" onchange="datepickerendchange()"></p></p>');
+  // use type="text" so jQuery UI datepicker attaches reliably in IE/Edge mode
+  document.write('<p>開始日：<input type="text" class="StrDate" id="StrDate" name="StrDate" style="width:100px" value="' + strdate + '" id="datepicker1" onchange="datepickerstrchange()"></p></p>');
+  document.write('<p>終了日：<input type="text" class="EndDate" id="EndDate" name="EndDate" style="width:100px" value="' + enddate + '" id="datepicker2" onchange="datepickerendchange()"></p></p>');
         document.write('<input type="button" id="reg_button" value="抽出" onClick="return regist_data()"/>');
       document.write('</form>');
     </script>
@@ -262,7 +273,7 @@
         if (regist_flg == true)
         {
           document.cookie = 'calcflg=1';
-          window.open('Regist_data_period.php?code='+namecode, '_self');
+          window.open('Regist_data_period-test.php?code='+namecode, '_self');
           return true;
         }
         else

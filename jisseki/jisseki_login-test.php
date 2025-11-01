@@ -136,22 +136,18 @@
 <!--
     <B><p style=   "font-size:16px; position:absolute; left:12px; top:70px; left:20px; color: #c20000;">※個人別に設定した休業日は「有休・代休・早退」で登録してください。</p></B> 
 -->
-    <B><p style="font-size:16px; position:absolute; left:12px; top:110px; color: #c20000;">更新情報：</p></B>
-    <p style=   "font-size:16px; position:absolute; left:12px; top:130px; left:20px; color: #c20000;">追加：Xacti_遠隔_XBP_日立ビル個別仕様対応</p>
-    <p style=   "font-size:16px; position:absolute; left:12px; top:150px; left:20px; color: #c20000;">追加：OEM_GV社_NER3A_機構系開発[CET32_縦グリップ_機構系開発]</p>
-    <p style=   "font-size:16px; position:absolute; left:12px; top:170px; left:20px; color: #c20000;">追加：OEM_GV社_NER3A_回路系開発[CET32_縦グリップ_回路系開発]</p>
-    <p style=   "font-size:16px; position:absolute; left:12px; top:190px; left:20px; color: #000000;">名称変更：Xacti_建設_UE10O→Xacti_建設_UE10U[フォクレコ(AI基板変更)]</p>
-    <p style=   "font-size:16px; position:absolute; left:12px; top:210px; left:20px; color: #000000;">名称変更：OEM_GV社_SPX10_回路系開発→OEM_GV社_CET34_回路系開発</p>
+    <B><p style="font-size:16px; position:absolute; left:12px; top: 60px; color: #c20000;">更新情報：</p></B>
+    <p style=   "font-size:16px; position:absolute; left:12px; top: 85px; left:20px; color: #c20000;">更新：Edge、Chromeに対応しました（IEモードへの切り替えは不要）</p>
+    <p style=   "font-size:16px; position:absolute; left:12px; top:110px; left:20px; color: #000000;">追加：Xacti_遠隔_XBP_日立ビル個別仕様対応</p>
+    <p style=   "font-size:16px; position:absolute; left:12px; top:135px; left:20px; color: #000000;">追加：OEM_GV社_NER3A_機構系開発[CET32_縦グリップ_機構系開発]</p>
+    <p style=   "font-size:16px; position:absolute; left:12px; top:160px; left:20px; color: #000000;">追加：OEM_GV社_NER3A_回路系開発[CET32_縦グリップ_回路系開発]</p>
+    <p style=   "font-size:16px; position:absolute; left:12px; top:185px; left:20px; color: #000000;">名称変更：Xacti_建設_UE10O→Xacti_建設_UE10U[フォクレコ(AI基板変更)]</p>
    
     <B><p style="font-size:13px; position:absolute; left:12px; top:250px; color: #000000;">注意事項：</p></B>
-    <p style=   "font-size:13px; position:absolute; left:12px; top:270px; left:20px; color: #000000;">ブラウザはMicrosoft Edgeの Internet Explorerモードと、Internet Explorerに対応しています。Windows10へアップデートした方はご注意ください。</p>
-    <p style=   "font-size:13px; position:absolute; left:12px; top:290px; left:20px; color: #000000;">Windows10への更新／Window Update等で機種リストが空欄になる場合があります。</p>
-    <p style=   "font-size:13px; position:absolute; left:12px; top:310px; left:20px; color: #000000;">本ページ最下部の「マニュアルを開く」からP4の「インターネットオプション設定」の変更をお願いします。※下側の互換設定変更は不要</p>
-    
-    <p style=   "font-size:13px; position:absolute; left:12px; top:350px;">ログイン後、部署名が異なる場合は<a href="mailto:tomohiro.yamamoto@xacti-co.com;mikako.yura@xacti-co.com">管理者</a>まで連絡をお願いします。<br></p>
-    <p style=   "font-size:13px; position:absolute; left: 7px; top:370px;">※先頭の0を除く5桁の氏名コードを入力</p>
-    <p style=   "font-size:13px; position:absolute; left:12px; top:390px;">　派遣社員はX00*****の*部5桁を入力</p>
-    <p style=   "font-size:13px; position:absolute; left:12px; top:410px; color: #c20000;">　ブラウザはMicrosoft Edgeの Internet Explorerモード、あるいはInternet Explorer推奨</p>
-    <p style=   "font-size:13px; position:absolute; left:12px; top:430px;"><a href="http://172.21.110.106/resource/実績収集システム_マニュアル.pdf" target="_blank">マニュアルを開く</a></p>
+    <p style=   "font-size:13px; position:absolute; left:12px; top:270px; left:20px; color: #000000;">ブラウザはMicrosoft Edge、Google Chromeをご使用ください。（IEモードへの切り替えは不要）</p>
+    <p style=   "font-size:13px; position:absolute; left:12px; top:290px; left:20px">ログイン後、部署名が異なる場合は<a href="https://teams.microsoft.com/l/channel/19%3A4WJMGM-cVNNI2RMfELwXiqBYWW7Bp-kPgKKeltMmN6Y1%40thread.tacv2/%E4%B8%80%E8%88%AC?groupId=897ff081-4025-4086-905f-10fa61e1b528&tenantId=52d3f7c5-0ee1-45a4-9404-acd57e38f44f">管理者</a>まで連絡をお願いします。<br></p>
+    <p style=   "font-size:13px; position:absolute; left: 7px; top:310px; left:20px">※先頭の0を除く5桁の氏名コードを入力</p>
+    <p style=   "font-size:13px; position:absolute; left:12px; top:330px; left:20px">　派遣社員はX00*****の*部5桁を入力</p>
+    <p style=   "font-size:13px; position:absolute; left:12px; top:370px;"><a href="http://172.21.110.106/resource/実績収集システム_マニュアル.pdf" target="_blank">マニュアルを開く</a></p>
   </BODY>
 </HTML>	

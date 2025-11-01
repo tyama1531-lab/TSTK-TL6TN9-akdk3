@@ -7,7 +7,41 @@ session_start();
   
   //Accessデータベースに接続
   if (! $con = odbc_connect($DSN, $DBUSER, $DBPASSWORD)){
-    exit("Accessデータベースに接続できませんでした！");}
+    // 詳細をログに残す（デバッグ用）。ブラウザには詳細を表示しない。
+    $err_msg = "";
+    if (function_exists('odbc_errormsg')) $err_msg = odbc_errormsg();
+    $err_code = "";
+    if (function_exists('odbc_error')) $err_code = odbc_error();
+    $info = date('c') . "\tODBC_CONNECT_FAILED\tDSN={$DSN}\tuser=" . get_current_user() . "\tpid=" . getmypid() . "\tsapi=" . php_sapi_name() . "\terr=" . str_replace("\n"," ",$err_msg) . "\tcode=" . $err_code . "\tfile=" . __FILE__ . PHP_EOL;
+    @file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . 'odbc_connect_error.log', $info, FILE_APPEND | LOCK_EX);
+    // 本番同等の汎用エラーメッセージで終了（詳細はサーバログ参照）
+    exit("アクセスエラー（しばらく時間を置いてから再度ログインをお願いします）");
+  }
+
+  // helper: execute ODBC with retry and logging to mitigate transient Access/ODBC errors
+  function odbc_exec_with_retry($con, $sql, $maxRetries = 5, $initialDelayMs = 200)
+  {
+    $attempt = 0;
+    $logfile = __DIR__ . DIRECTORY_SEPARATOR . 'odbc_retry.log';
+    while ($attempt < $maxRetries) {
+      $attempt++;
+      $res = @odbc_exec($con, $sql);
+      if ($res !== false) {
+        return $res;
+      }
+      // log a short message for diagnostics
+      $err = '';
+      if (function_exists('odbc_errormsg')) {
+        $err = odbc_errormsg($con);
+      }
+      $short = mb_substr($sql, 0, 200);
+      $msg = date('c') . "\tattempt={$attempt}\terr=" . str_replace("\n", ' ', $err) . "\tsql=" . str_replace("\n", ' ', $short) . PHP_EOL;
+      @file_put_contents($logfile, $msg, FILE_APPEND | LOCK_EX);
+      // exponential backoff-ish sleep (ms -> us)
+      usleep($initialDelayMs * 1000 * $attempt);
+    }
+    return false;
+  }
   
 //$name_code = $_POST['name_code'];
   $name_code = $_GET['code'];
@@ -184,32 +218,32 @@ session_start();
 //  $sql_indata = "SELECT T_ResourceTB.Model_ID, T_ResourceTB.Employee_CD, T_ResourceTB.Dept_CD, T_ResourceTB.Position_CD, T_ResourceTB.Time_input, T_ResourceTB.FTE, T_ResourceTB.Time_input_flg, T_ResourceTB.Work_time_CD, T_ResourceTB.Month_CD, T_ResourceTB.InputDate, T_ResourceTB.Client_CD, T_ResourceTB.AfterMp_task_check FROM T_ResourceTB WHERE (((T_ResourceTB.Employee_CD)=" . $name_code .") AND ((T_ResourceTB.InputDate)=#" . $Indate . "#))";
     $sql_indata = "SELECT T_ResourceTB.Model_ID, T_ResourceTB.Employee_CD, T_ResourceTB.Dept_CD, T_ResourceTB.Position_CD, T_ResourceTB.Time_input, T_ResourceTB.FTE, T_ResourceTB.Time_input_flg, T_ResourceTB.Work_time_CD, T_ResourceTB.Month_CD, T_ResourceTB.InputDate, T_ResourceTB.Client_CD, T_ResourceTB.AfterMp_task_check, T_ResourceTB.Slide_data_flg FROM T_ResourceTB WHERE (((T_ResourceTB.Employee_CD)=" . $name_code .") AND ((T_ResourceTB.InputDate)=#" . $Indate . "#) AND ((T_ResourceTB.Slide_data_flg)=False))";
     
-    if (@odbc_exec($con, $sql_indata))
-        $rst_indata = odbc_exec($con, $sql_indata);
-    else{
+    $rst_indata = odbc_exec_with_retry($con, $sql_indata);
+    if ($rst_indata === false) {
       print "アクセスエラー（しばらく時間を置いてから再度ログインをお願いします） error_indata";
-      exit;}
+      exit;
+    }
     
     //機種リストの読込み
 //  $sql_model_latest = "SELECT T_ResourceTB.Model_ID, Q_Oem_code.Client_code, Q_Model_list.model_code, Q_Model_list.Feature, T_ResourceTB.Employee_CD, Sum(T_ResourceTB.FTE) AS FTE_all FROM Q_Oem_code RIGHT JOIN (Q_Model_list RIGHT JOIN T_ResourceTB ON Q_Model_list.Model_ID = T_ResourceTB.Model_ID) ON Q_Oem_code.OEM_CD = Q_Model_list.OEM WHERE (((T_ResourceTB.InputDate)>=Date()-90) AND ((Q_Model_list.Common_task_check)=False)) GROUP BY T_ResourceTB.Model_ID, Q_Oem_code.Client_code, Q_Model_list.model_code, Q_Model_list.Feature, T_ResourceTB.Employee_CD HAVING (((T_ResourceTB.Employee_CD)=" . $name_code . ")) ORDER BY Sum(T_ResourceTB.FTE) DESC";
 //    $sql_model_latest = "SELECT T_ResourceTB.Model_ID, Q_Oem_code.Client_code, Q_Model_list.model_code, Q_Model_list.Feature, T_ResourceTB.Employee_CD, Sum(T_ResourceTB.FTE) AS FTE_all FROM Q_Oem_code RIGHT JOIN (Q_Model_list RIGHT JOIN T_ResourceTB ON Q_Model_list.Model_ID = T_ResourceTB.Model_ID) ON Q_Oem_code.OEM_CD = Q_Model_list.OEM WHERE (((T_ResourceTB.InputDate)>=Date()-90) AND ((Q_Model_list.Common_task_check)=False) AND ((Q_Model_list.Supply_type)<>0)) GROUP BY T_ResourceTB.Model_ID, Q_Oem_code.Client_code, Q_Model_list.model_code, Q_Model_list.Feature, T_ResourceTB.Employee_CD HAVING (((T_ResourceTB.Employee_CD)=" . $name_code . ")) ORDER BY Sum(T_ResourceTB.FTE) DESC";
     $sql_model_latest = "SELECT T_ResourceTB.Model_ID, Q_Oem_code.Client_code, Q_Model_list_JiInput.model_code, Q_Model_list_JiInput.Feature, T_ResourceTB.Employee_CD, Sum(T_ResourceTB.FTE) AS FTE_all FROM Q_Oem_code RIGHT JOIN (Q_Model_list_JiInput RIGHT JOIN T_ResourceTB ON Q_Model_list_JiInput.Model_ID = T_ResourceTB.Model_ID) ON Q_Oem_code.OEM_CD = Q_Model_list_JiInput.OEM WHERE (((T_ResourceTB.InputDate)>=Date()-90) AND ((Q_Model_list_JiInput.Common_task_check)=False) AND ((Q_Model_list_JiInput.Supply_type)<>0)) GROUP BY T_ResourceTB.Model_ID, Q_Oem_code.Client_code, Q_Model_list_JiInput.model_code, Q_Model_list_JiInput.Feature, T_ResourceTB.Employee_CD HAVING (((T_ResourceTB.Employee_CD)=" . $name_code . ")) ORDER BY Sum(T_ResourceTB.FTE) DESC";
-    if (@odbc_exec($con, $sql_model_latest))
-        $rst_model_latest = odbc_exec($con, $sql_model_latest);
-    else{
+    $rst_model_latest = odbc_exec_with_retry($con, $sql_model_latest);
+    if ($rst_model_latest === false) {
       print "アクセスエラー（しばらく時間を置いてから再度ログインをお願いします） error_model_latest";
-      exit;}
+      exit;
+    }
     
 //  $sql_model_other  = "SELECT Q_Model_list.*, Q_Oem_code.Client_code, Q_Model_list.model_code, Q_Model_list.Overtime_check, Q_Model_list.Possibility FROM Q_Oem_code RIGHT JOIN Q_Model_list ON Q_Oem_code.OEM_CD = Q_Model_list.OEM WHERE (((Q_Model_list.Overtime_check)=True) AND ((Q_Model_list.Possibility)=1)) ORDER BY Q_Model_list.model_code";
 //    $sql_model_other  = "SELECT Q_Model_list.*, Q_Oem_code.Client_code, Q_Model_list.model_code, Q_Model_list.Overtime_check, Q_Model_list.Possibility FROM Q_Oem_code RIGHT JOIN Q_Model_list ON Q_Oem_code.OEM_CD = Q_Model_list.OEM WHERE (((Q_Model_list.Overtime_check)=True)) ORDER BY Q_Model_list.model_code";
     $sql_model_other  = "SELECT Q_Model_list_JiInput.*, Q_Oem_code.Client_code, Q_Model_list_JiInput.model_code, Q_Model_list_JiInput.Overtime_check, Q_Model_list_JiInput.Possibility FROM Q_Oem_code RIGHT JOIN Q_Model_list_JiInput ON Q_Oem_code.OEM_CD = Q_Model_list_JiInput.OEM WHERE (((Q_Model_list_JiInput.Overtime_check)=True)) ORDER BY Q_Model_list_JiInput.model_code";
     
     
-    if (@odbc_exec($con, $sql_model_other))
-        $rst_model_other  = odbc_exec($con, $sql_model_other);
-    else{
+    $rst_model_other = odbc_exec_with_retry($con, $sql_model_other);
+    if ($rst_model_other === false) {
       print "アクセスエラー（しばらく時間を置いてから再度ログインをお願いします） error_model_other";
-      exit;}
+      exit;
+    }
     
     
     $model_list = array();
@@ -263,11 +297,11 @@ session_start();
     //共通業務リスト読込み
 //    $sql_common = "SELECT T_Common_task_master.*, T_Common_task_master.Common_task_order FROM T_Common_task_master ORDER BY T_Common_task_master.Common_task_order";
     $sql_common = "SELECT T_Common_task_230601Rule.*, T_Common_task_230601Rule.Common_task_order FROM T_Common_task_230601Rule ORDER BY T_Common_task_230601Rule.Common_task_order";
-    if (@odbc_exec($con, $sql_common))
-      $rst_common = odbc_exec($con, $sql_common);
-    else{
+    $rst_common = odbc_exec_with_retry($con, $sql_common);
+    if ($rst_common === false) {
       print "アクセスエラー（しばらく時間を置いてから再度ログインをお願いします） error_common";
-      exit;}
+      exit;
+    }
     
     $common_list = array();
     $common_id_list = array();
@@ -294,11 +328,11 @@ session_start();
     
     //OEMリスト読込み
     $sql_client = "SELECT Q_Client_list.* FROM Q_Client_list";
-    if (@odbc_exec($con, $sql_client))
-      $rst_client = odbc_exec($con, $sql_client);
-    else{
+    $rst_client = odbc_exec_with_retry($con, $sql_client);
+    if ($rst_client === false) {
       print "アクセスエラー（しばらく時間を置いてから再度ログインをお願いします） error_client";
-      exit;}
+      exit;
+    }
     
     $client_list = array();
     $client_id_list = array();
@@ -334,11 +368,11 @@ session_start();
       
       $sql_model_id = "SELECT Q_Model_list.Model_ID, Q_Model_list.Common_task_check FROM Q_Model_list WHERE (((Q_Model_list.Model_ID)=" . $inmodel . "))";
 //      $sql_model_id = "SELECT Q_Model_list_JiInput.Model_ID, Q_Model_list_JiInput.Common_task_check FROM Q_Model_list_JiInput WHERE (((Q_Model_list_JiInput.Model_ID)=" . $inmodel . "))";
-      if (@odbc_exec($con, $sql_model_id))
-        $rst_model_id = odbc_exec($con, $sql_model_id);
-      else{
+      $rst_model_id = odbc_exec_with_retry($con, $sql_model_id);
+      if ($rst_model_id === false) {
         print "アクセスエラー（しばらく時間を置いてから再度ログインをお願いします） error_model_id";
-        exit;}
+        exit;
+      }
       
       $common_check = odbc_result($rst_model_id, "Common_task_check");
       odbc_free_result($rst_model_id);
@@ -370,11 +404,11 @@ session_start();
         $nModelCnt += 1;
       }
       
-      if (@odbc_exec($con, $sql_client))
-        $rst_client = odbc_exec($con, $sql_client);
-      else{
+      $rst_client = odbc_exec_with_retry($con, $sql_client);
+      if ($rst_client === false) {
         print "アクセスエラー（しばらく時間を置いてから再度ログインをお願いします） error_client";
-        exit;}
+        exit;
+      }
       
       $nClientCnt = 0;
       while(odbc_fetch_row($rst_client))
@@ -486,11 +520,11 @@ session_start();
     
     //部署情報の読込み
     $sql_dept = "SELECT * FROM T_Official_dept_cd";
-    if (@odbc_exec($con, $sql_dept))
-      $rst_dept = odbc_exec($con, $sql_dept);
-    else{
+    $rst_dept = odbc_exec_with_retry($con, $sql_dept);
+    if ($rst_dept === false) {
       print "アクセスエラー（しばらく時間を置いてから再度ログインをお願いします） error_dept";
-      exit;}
+      exit;
+    }
     
     $judge=0;
     while (odbc_fetch_row($rst_dept) Or $judge=0)
@@ -521,17 +555,30 @@ session_start();
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- Fallback: if CDN jQuery is blocked (intranet/IE-mode), load local copy -->
+    <!-- Fallbacks for intranet / IE-mode: load local copies if CDN blocked -->
     <script>
       if (typeof window.jQuery === 'undefined') {
-        // relative path to local copy under jisseki/jquery/
         document.write('<script src="jquery/jquery.min.js"><\/script>');
+      }
+      // if jQuery UI not loaded (no $.datepicker), load local copies
+      if (typeof $.datepicker === 'undefined') {
+        // local paths: jisseki/jquery-ui/jquery-ui.min.js and jisseki/jquery-ui/jquery-ui.css
+        document.write('<link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">');
+        document.write('<script src="jquery-ui/jquery-ui.min.js"><\/script>');
       }
     </script>
     <script>
-      $( function()
-      {
-        $( "#datepicker" ).datepicker();
+      $( function() {
+    
+        // set Japanese regional defaults if available
+        try { if ($.datepicker && $.datepicker.regional && $.datepicker.regional['ja']) {
+            $.datepicker.setDefaults($.datepicker.regional['ja']);
+          }
+        } catch(e) { /* ignore */ }
+        // ensure consistent format
+        if ($.datepicker) {
+          $("#datepicker").datepicker({dateFormat: 'mm/dd/yy'});
+        }
       });
     </script>
   </head>
@@ -554,7 +601,8 @@ session_start();
         var today = month + "/" + day  + "/" + year;
         var Inputdate = month + day + year;
         
-        var input_doc = '<input type="date" name="date_picker" style="width:100px" value="' + today + '"id="datepicker" onchange="datepickerchange()"></p>'
+  // use type="text" so jQuery UI datepicker always attaches (IE/native date input can interfere)
+  var input_doc = '<input type="text" name="date_picker" style="width:100px" value="' + today + '" id="datepicker" onchange="datepickerchange()"></p>'
         var input_namecode = '<input id="namecode" type="hidden" name="namecode" value="' + <?php echo $name_code; ?> + '" />'
         var am1   = <?php echo $am1_radio; ?>;
         var am2   = <?php echo $am2_radio; ?>;
@@ -644,83 +692,95 @@ session_start();
           document.write('<input type="button" id="un_reg_button" style="position:absolute; left:220px; top:370px;" value="実績抽出(機種)" onClick="registed_date_model()" />');
 //          document.getElementById("reg_button").disabled = sRegJudge;
           document.write('<?=$body_employee?>');
+          // MINIMAL_HIDE_PATCH: clientlist を CSS で非表示（最小変更）
+          document.write('<style>select[id^="clientlist"]{display:none !important;}</style>');
           document.write('<label for="radio_model1" style="position:absolute; top:108px; left: 50px;">［機種］</label>');
           document.write('<label for="radio_model1" style="position:absolute; top:108px; left:105px;">［共通］</label>');
           document.write('<label for="radio_model1" style="position:absolute; top:108px; left:175px;">［時間］</label>');
           document.write('<label for="radio_model1" style="position:absolute; top:108px; left:265px;">［業務］</label>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - アカウント列ラベル（非表示で出力、DOMは維持）
           document.write('<label for="radio_model1" style="position:absolute; top:108px; left:885px;">［アカウント］</label>');
-          document.write('<label for="radio_model1" style="position:absolute; top:108px; left:975px;">［量産後の不具合対応］</label>');
+          // move the '量産後の不具合対応' label closer to the modellist selects
+          document.write('<label for="radio_model1" style="position:absolute; top:108px; left:835px;">［量産後の不具合対応］</label>');
           
           document.write('<label for="radio_model1" style="position:absolute; top: 90px; left:194px; color:#C00000; font-size:12px;">↓ [時間]を単位:hで入力（任意）できます。入力例は<a href="http://172.21.110.106/resource/時間入力例.pdf" target="_blank">こちら</a></label>');
           
-          document.write('<input type="button" id="un_reg_button" style="position:absolute; left:160px; top:5px;" value="未登録日抽出" onClick="unregisted_date()" />');
+          document.write('<input type="button" id="un_reg_button" style="position:absolute; left:160px; top:10px;" value="未登録日抽出" onClick="unregisted_date()" />');
           
           
           document.write('<p style="position:absolute; left:5px; top:111px;">午前：</p>');
           
-          document.write('<input id="radio_model1_0" type="radio" name="radio_category_1" value="0" style="position:absolute; left: 60px; top:127px;" onchange="categorychange1()" <?php if($am1_radio==0){echo "checked";}?> />');
-          document.write('<input id="radio_model1_1" type="radio" name="radio_category_1" value="1" style="position:absolute; left:115px; top:127px;" onchange="categorychange1()" <?php if($am1_radio==1){echo "checked";}?> />');
-          document.write('<input type="text" id="timebox1" name="timebox1" style="position:absolute; left:177px; top:127px; width:43px; text-align:right;" value="' + amt1 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:130px; left:222px;">h</label>');
-          document.write('<select id="modellist1" name="modellist1" style="margin-bottom:3px; position:absolute; top:127px; left:260px;" onchange="listchange1()"></select>');
-          document.write('<select id="clientlist1" name="clientlist1" style="margin-bottom:3px; position:absolute; top:127px; left:870px;"' + bClient_am1 + ';></select>');
-          document.write('<input type="checkbox" id="after_mp_task1" name="after_mp_task1" value="1" style="position:absolute; left:1040px; top:127px;" <?php if($am1_radio==1){echo "disabled";}?> <?php if($am1_aftmpchk==true){echo "checked";}?>>');
+          document.write('<input id="radio_model1_0" type="radio" name="radio_category_1" value="0" style="position:absolute; left: 74px; top:131px;" onchange="categorychange1()" <?php if($am1_radio==0){echo "checked";}?> />');
+          document.write('<input id="radio_model1_1" type="radio" name="radio_category_1" value="1" style="position:absolute; left:117px; top:131px;" onchange="categorychange1()" <?php if($am1_radio==1){echo "checked";}?> />');
+          document.write('<input type="text" id="timebox1" name="timebox1" style="position:absolute; left:187px; top:131px; width:43px; text-align:right;" value="' + amt1 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:131px; left:232px;">h</label>');
+          document.write('<select id="modellist1" name="modellist1" style="margin-bottom:3px; position:absolute; top:131px; left:260px;" onchange="listchange1()"></select>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - clientlist1（非表示で出力、DOMは維持）
+          document.write('<select id="clientlist1" name="clientlist1" style="margin-bottom:3px; position:absolute; top:131px; left:880px;"' + bClient_am1 + '></select>');
+          document.write('<input type="checkbox" id="after_mp_task1" name="after_mp_task1" value="1" style="position:absolute; left:910px; top:131px;" <?php if($am1_radio==1){echo "disabled";}?> <?php if($am1_aftmpchk==true){echo "checked";}?>>');
           
-          document.write('<input id="radio_model2_0" type="radio" name="radio_category_2" value="0" style="position:absolute; left: 60px; top:150px;" onchange="categorychange2()" <?php if($am2_radio==0){echo "checked";}?> />');
-          document.write('<input id="radio_model2_1" type="radio" name="radio_category_2" value="1" style="position:absolute; left:115px; top:150px;" onchange="categorychange2()" <?php if($am2_radio==1){echo "checked";}?> />');
-          document.write('<input type="text" id="timebox2" name="timebox2" style="position:absolute; left:177px; top:150px; width:43px; text-align:right;" value="' + amt2 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:153px; left:222px;">h</label>');
-          document.write('<select id="modellist2" name="modellist2" style="margin-bottom:3px; position:absolute; top:150px; left:260px;" onchange="listchange2()"></select>');
-          document.write('<select id="clientlist2" name="clientlist2" style="margin-bottom:3px; position:absolute; top:150px; left:870px;"' + bClient_am2 + '></select>');
-          document.write('<input type="checkbox" id="after_mp_task2" name="after_mp_task2" value="2" style="position:absolute; left:1040px; top:150px;" <?php if($am2_radio==1){echo "disabled";}?> <?php if($am2_aftmpchk==true){echo "checked";}?>>');
+          document.write('<input id="radio_model2_0" type="radio" name="radio_category_2" value="0" style="position:absolute; left: 74px; top:154px;" onchange="categorychange2()" <?php if($am2_radio==0){echo "checked";}?> />');
+          document.write('<input id="radio_model2_1" type="radio" name="radio_category_2" value="1" style="position:absolute; left:117px; top:154px;" onchange="categorychange2()" <?php if($am2_radio==1){echo "checked";}?> />');
+          document.write('<input type="text" id="timebox2" name="timebox2" style="position:absolute; left:187px; top:154px; width:43px; text-align:right;" value="' + amt2 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:154px; left:232px;">h</label>');
+          document.write('<select id="modellist2" name="modellist2" style="margin-bottom:3px; position:absolute; top:154px; left:260px;" onchange="listchange2()"></select>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - clientlist2（非表示で出力、DOMは維持）
+          document.write('<select id="clientlist2" name="clientlist2" style="margin-bottom:3px; position:absolute; top:154px; left:880px;"' + bClient_am2 + '></select>');
+          document.write('<input type="checkbox" id="after_mp_task2" name="after_mp_task2" value="2" style="position:absolute; left:910px; top:154px;" <?php if($am2_radio==1){echo "disabled";}?> <?php if($am2_aftmpchk==true){echo "checked";}?>>');
           
-          document.write('<input id="radio_model3_0" type="radio" name="radio_category_3" value="0" style="position:absolute; left: 60px; top:173px;" onchange="categorychange3()" <?php if($am3_radio==0){echo "checked";}?> />');
-          document.write('<input id="radio_model3_1" type="radio" name="radio_category_3" value="1" style="position:absolute; left:115px; top:173px;" onchange="categorychange3()" <?php if($am3_radio==1){echo "checked";}?> />');
-          document.write('<input type="text" id="timebox3" name="timebox3" style="position:absolute; left:177px; top:173px; width:43px; text-align:right;" value="' + amt3 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:176px; left:222px;">h</label>');
-          document.write('<select id="modellist3" name="modellist3" style="margin-bottom:3px; position:absolute; top:173px; left:260px;" onchange="listchange3()"></select>');
-          document.write('<select id="clientlist3" name="clientlist3" style="margin-bottom:3px; position:absolute; top:173px; left: 870px;"' + bClient_am3 + '></select>');
-          document.write('<input type="checkbox" id="after_mp_task3" name="after_mp_task3" value="3" style="position:absolute; left:1040px; top:173px;" <?php if($am3_radio==1){echo "disabled";}?> <?php if($am3_aftmpchk==true){echo "checked";}?>>');
+          document.write('<input id="radio_model3_0" type="radio" name="radio_category_3" value="0" style="position:absolute; left: 74px; top:177px;" onchange="categorychange3()" <?php if($am3_radio==0){echo "checked";}?> />');
+          document.write('<input id="radio_model3_1" type="radio" name="radio_category_3" value="1" style="position:absolute; left:117px; top:177px;" onchange="categorychange3()" <?php if($am3_radio==1){echo "checked";}?> />');
+          document.write('<input type="text" id="timebox3" name="timebox3" style="position:absolute; left:187px; top:177px; width:43px; text-align:right;" value="' + amt3 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:177px; left:232px;">h</label>');
+          document.write('<select id="modellist3" name="modellist3" style="margin-bottom:3px; position:absolute; top:177px; left:260px;" onchange="listchange3()"></select>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - clientlist3（非表示で出力、DOMは維持）
+          document.write('<select id="clientlist3" name="clientlist3" style="margin-bottom:3px; position:absolute; top:177px; left: 880px;"' + bClient_am3 + '></select>');
+          document.write('<input type="checkbox" id="after_mp_task3" name="after_mp_task3" value="3" style="position:absolute; left:910px; top:177px;" <?php if($am3_radio==1){echo "disabled";}?> <?php if($am3_aftmpchk==true){echo "checked";}?>>');
           
           
           document.write('<p style="position:absolute; left:5px; top:205px;">午後：</p>');
           
           
-          document.write('<input id="radio_model4_0" type="radio" name="radio_category_4" value="0" style="position:absolute; left: 60px; top:220px;" onchange="categorychange4()" <?php if($pm1_radio==0){echo "checked";}?> />');
-          document.write('<input id="radio_model4_1" type="radio" name="radio_category_4" value="1" style="position:absolute; left:115px; top:220px;" onchange="categorychange4()" <?php if($pm1_radio==1){echo "checked";}?> />');
-          document.write('<input type="text" id="timebox4" name="timebox4" style="position:absolute; left:177px; top:220px; width:43px; text-align:right;" value="' + pmt1 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:223px; left:222px;">h</label>');
-          document.write('<select id="modellist4" name="modellist4" style="margin-bottom:3px; position:absolute; top:220px; left:260px;" onchange="listchange4()"></select>');
-          document.write('<select id="clientlist4" name="clientlist4" style="margin-bottom:3px; position:absolute; top:220px; left:870px;"' + bClient_pm1 + '></select>');
-          document.write('<input type="checkbox" id="after_mp_task4" name="after_mp_task4" value="4" style="position:absolute; left:1040px; top:220px;" <?php if($pm1_radio==1){echo "disabled";}?> <?php if($pm1_aftmpchk==true){echo "checked";}?>>');
+          document.write('<input id="radio_model4_0" type="radio" name="radio_category_4" value="0" style="position:absolute; left: 74px; top:224px;" onchange="categorychange4()" <?php if($pm1_radio==0){echo "checked";}?> />');
+          document.write('<input id="radio_model4_1" type="radio" name="radio_category_4" value="1" style="position:absolute; left:117px; top:224px;" onchange="categorychange4()" <?php if($pm1_radio==1){echo "checked";}?> />');
+          document.write('<input type="text" id="timebox4" name="timebox4" style="position:absolute; left:187px; top:224px; width:43px; text-align:right;" value="' + pmt1 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:224px; left:232px;">h</label>');
+          document.write('<select id="modellist4" name="modellist4" style="margin-bottom:3px; position:absolute; top:224px; left:260px;" onchange="listchange4()"></select>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - clientlist4（非表示で出力、DOMは維持）
+          document.write('<select id="clientlist4" name="clientlist4" style="margin-bottom:3px; position:absolute; top:224px; left:880px;"' + bClient_pm1 + '></select>');
+          document.write('<input type="checkbox" id="after_mp_task4" name="after_mp_task4" value="4" style="position:absolute; left:910px; top:224px;" <?php if($pm1_radio==1){echo "disabled";}?> <?php if($pm1_aftmpchk==true){echo "checked";}?>>');
           
-          document.write('<input id="radio_model5_0" type="radio" name="radio_category_5" value="0" style="position:absolute; left: 60px; top:243px;" onchange="categorychange5()" <?php if($pm2_radio==0){echo "checked";}?> />');
-          document.write('<input id="radio_model5_1" type="radio" name="radio_category_5" value="1" style="position:absolute; left:115px; top:243px;" onchange="categorychange5()" <?php if($pm2_radio==1){echo "checked";}?> />');
-          document.write('<input type="text" id="timebox5" name="timebox5" style="position:absolute; left:177px; top:243px; width:43px; text-align:right;" value="' + pmt2 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:246px; left:222px;">h</label>');
-          document.write('<select id="modellist5" name="modellist5" style="margin-bottom:3px; position:absolute; top:243px; left:260px;" onchange="listchange5()"></select>');
-          document.write('<select id="clientlist5" name="clientlist5" style="margin-bottom:3px; position:absolute; top:243px; left:870px;"' + bClient_pm2 + '></select>');
-          document.write('<input type="checkbox" id="after_mp_task5" name="after_mp_task5" value="5" style="position:absolute; left:1040px; top:243px;" <?php if($pm2_radio==1){echo "disabled";}?> <?php if($pm2_aftmpchk==true){echo "checked";}?>>');
+          document.write('<input id="radio_model5_0" type="radio" name="radio_category_5" value="0" style="position:absolute; left: 74px; top:247px;" onchange="categorychange5()" <?php if($pm2_radio==0){echo "checked";}?> />');
+          document.write('<input id="radio_model5_1" type="radio" name="radio_category_5" value="1" style="position:absolute; left:117px; top:247px;" onchange="categorychange5()" <?php if($pm2_radio==1){echo "checked";}?> />');
+          document.write('<input type="text" id="timebox5" name="timebox5" style="position:absolute; left:187px; top:247px; width:43px; text-align:right;" value="' + pmt2 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:247px; left:232px;">h</label>');
+          document.write('<select id="modellist5" name="modellist5" style="margin-bottom:3px; position:absolute; top:247px; left:260px;" onchange="listchange5()"></select>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - clientlist5（非表示で出力、DOMは維持）
+          document.write('<select id="clientlist5" name="clientlist5" style="margin-bottom:3px; position:absolute; top:247px; left:880px;"' + bClient_pm2 + '></select>');
+          document.write('<input type="checkbox" id="after_mp_task5" name="after_mp_task5" value="5" style="position:absolute; left:910px; top:247px;" <?php if($pm2_radio==1){echo "disabled";}?> <?php if($pm2_aftmpchk==true){echo "checked";}?>>');
           
-          document.write('<input id="radio_model6_0" type="radio" name="radio_category_6" value="0" style="position:absolute; left: 60px; top:266px;" onchange="categorychange6()" <?php if($pm3_radio==0){echo "checked";}?> />');
-          document.write('<input id="radio_model6_1" type="radio" name="radio_category_6" value="1" style="position:absolute; left:115px; top:266px;" onchange="categorychange6()" <?php if($pm3_radio==1){echo "checked";}?> />');
-          document.write('<input type="text" id="timebox6" name="timebox6" style="position:absolute; left:177px; top:266px; width:43px; text-align:right;" value="' + pmt3 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:269px; left:222px;">h</label>');
-          document.write('<select id="modellist6" name="modellist6" style="margin-bottom:3px; position:absolute; top:266px; left:260px;" onchange="listchange6()"></select>');
-          document.write('<select id="clientlist6" name="clientlist6" style="margin-bottom:3px; position:absolute; top:266px; left:870px;"' + bClient_pm3 + '></select>');
-          document.write('<input type="checkbox" id="after_mp_task6" name="after_mp_task6" value="6" style="position:absolute; left:1040px; top:266px;" <?php if($pm3_radio==1){echo "disabled";}?> <?php if($pm3_aftmpchk==true){echo "checked";}?>>');
+          document.write('<input id="radio_model6_0" type="radio" name="radio_category_6" value="0" style="position:absolute; left: 74px; top:270px;" onchange="categorychange6()" <?php if($pm3_radio==0){echo "checked";}?> />');
+          document.write('<input id="radio_model6_1" type="radio" name="radio_category_6" value="1" style="position:absolute; left:117px; top:270px;" onchange="categorychange6()" <?php if($pm3_radio==1){echo "checked";}?> />');
+          document.write('<input type="text" id="timebox6" name="timebox6" style="position:absolute; left:187px; top:270px; width:43px; text-align:right;" value="' + pmt3 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:270px; left:232px;">h</label>');
+          document.write('<select id="modellist6" name="modellist6" style="margin-bottom:3px; position:absolute; top:270px; left:260px;" onchange="listchange6()"></select>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - clientlist6（非表示で出力、DOMは維持）
+          document.write('<select id="clientlist6" name="clientlist6" style="margin-bottom:3px; position:absolute; top:270px; left:880px;"' + bClient_pm3 + '></select>');
+          document.write('<input type="checkbox" id="after_mp_task6" name="after_mp_task6" value="6" style="position:absolute; left:910px; top:270px;" <?php if($pm3_radio==1){echo "disabled";}?> <?php if($pm3_aftmpchk==true){echo "checked";}?>>');
           
           
           document.write('<p style="position:absolute; left:5px; top:297px;">残業：</p>');
           
           
-          document.write('<input id="radio_model7_0" type="radio" name="radio_category_7" value="0" style="position:absolute; left: 60px; top:313px;" onchange="categorychange7()" <?php if($ot1_radio==0){echo "checked";}?> />');
-          document.write('<input id="radio_model7_1" type="radio" name="radio_category_7" value="1" style="position:absolute; left:115px; top:313px;" onchange="categorychange7()" <?php if($ot1_radio==1){echo "checked";}?> />');
-          document.write('<input type="text" id="timebox7" name="timebox7" style="position:absolute; left:177px; top:313px; width:43px; text-align:right;" value="' + ott1 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:316px; left:222px;">h</label>');
-          document.write('<select id="modellist7" name="modellist7" style="margin-bottom:3px; position:absolute; top:313px; left:260px;" onchange="listchange7()"></select>');
-          document.write('<select id="clientlist7" name="clientlist7" style="margin-bottom:3px; position:absolute; top:313px; left:870px;"' + bClient_ot1 + '></select>');
-          document.write('<input type="checkbox" id="after_mp_task7" name="after_mp_task7" value="7" style="position:absolute; left:1040px; top:313px;" <?php if($ot1_radio==1){echo "disabled";}?> <?php if($ot1_aftmpchk==true){echo "checked";}?>>');
+          document.write('<input id="radio_model7_0" type="radio" name="radio_category_7" value="0" style="position:absolute; left: 74px; top:317px;" onchange="categorychange7()" <?php if($ot1_radio==0){echo "checked";}?> />');
+          document.write('<input id="radio_model7_1" type="radio" name="radio_category_7" value="1" style="position:absolute; left:117px; top:317px;" onchange="categorychange7()" <?php if($ot1_radio==1){echo "checked";}?> />');
+          document.write('<input type="text" id="timebox7" name="timebox7" style="position:absolute; left:187px; top:317px; width:43px; text-align:right;" value="' + ott1 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:317px; left:232px;">h</label>');
+          document.write('<select id="modellist7" name="modellist7" style="margin-bottom:3px; position:absolute; top:317px; left:260px;" onchange="listchange7()"></select>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - clientlist7（非表示で出力、DOMは維持）
+          document.write('<select id="clientlist7" name="clientlist7" style="margin-bottom:3px; position:absolute; top:317px; left:880px;"' + bClient_ot1 + '></select>');
+          document.write('<input type="checkbox" id="after_mp_task7" name="after_mp_task7" value="7" style="position:absolute; left:910px; top:317px;" <?php if($ot1_radio==1){echo "disabled";}?> <?php if($ot1_aftmpchk==true){echo "checked";}?>>');
           
-          document.write('<input id="radio_model8_0" type="radio" name="radio_category_8" value="0" style="position:absolute; left: 60px; top:336px;" onchange="categorychange8()" <?php if($ot2_radio==0){echo "checked";}?> />');
-          document.write('<input id="radio_model8_1" type="radio" name="radio_category_8" value="1" style="position:absolute; left:115px; top:336px;" onchange="categorychange8()" <?php if($ot2_radio==1){echo "checked";}?> />');
-          document.write('<input type="text" id="timebox8" name="timebox8" style="position:absolute; left:177px; top:336px; width:43px; text-align:right;" value="' + ott2 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:339px; left:222px;">h</label>');
-          document.write('<select id="modellist8" name="modellist8" style="margin-bottom:3px; position:absolute; top:336px; left:260px;" onchange="listchange8()"></select>');
-          document.write('<select id="clientlist8" name="clientlist8" style="margin-bottom:3px; position:absolute; top:336px; left:870px;"' + bClient_ot2 + '></select>');
-          document.write('<input type="checkbox" id="after_mp_task8" name="after_mp_task8" value="8" style="position:absolute; left:1040px; top:336px;" <?php if($ot2_radio==1){echo "disabled";}?> <?php if($ot2_aftmpchk==true){echo "checked";}?>>');
+          document.write('<input id="radio_model8_0" type="radio" name="radio_category_8" value="0" style="position:absolute; left: 74px; top:340px;" onchange="categorychange8()" <?php if($ot2_radio==0){echo "checked";}?> />');
+          document.write('<input id="radio_model8_1" type="radio" name="radio_category_8" value="1" style="position:absolute; left:117px; top:340px;" onchange="categorychange8()" <?php if($ot2_radio==1){echo "checked";}?> />');
+          document.write('<input type="text" id="timebox8" name="timebox8" style="position:absolute; left:187px; top:340px; width:43px; text-align:right;" value="' + ott2 + '" />'); document.write('<label for="radio_model1" style="position:absolute; top:340px; left:232px;">h</label>');
+          document.write('<select id="modellist8" name="modellist8" style="margin-bottom:3px; position:absolute; top:340px; left:260px;" onchange="listchange8()"></select>');
+// HIDDEN_BY_PATCH: 非表示化（テスト） - clientlist8（非表示で出力、DOMは維持）
+          document.write('<select id="clientlist8" name="clientlist8" style="margin-bottom:3px; position:absolute; top:340px; left:880px;"' + bClient_ot2 + '></select>');
+          document.write('<input type="checkbox" id="after_mp_task8" name="after_mp_task8" value="8" style="position:absolute; left:910px; top:340px;" <?php if($ot2_radio==1){echo "disabled";}?> <?php if($ot2_aftmpchk==true){echo "checked";}?>>');
           
           document.write(input_namecode);
           
@@ -730,7 +790,33 @@ session_start();
       }
     </script>
     
-    <div style="position:absolute; left:10px; top:420px; font-size:14px;">※機種リストへの追加や不具合は<a href="mailto:tomohiro.yamamoto@xacti-co.com;mikako.yura@xacti-co.com">管理者</a>までご連絡ください。</div>
+    <!-- Fix: modellist selects fixed width after selection, show full on focus and set title for tooltip -->
+    <script>
+      (function(){
+        function applyFixedWidth(px){
+          try{
+            var sels = document.querySelectorAll('select[id^="modellist"]');
+            for(var i=0;i<sels.length;i++){
+              var s = sels[i];
+              // set initial fixed width
+              s.style.width = px + 'px';
+              // set tooltip to full text
+              try{ if(s.options && s.selectedIndex>=0) s.title = s.options[s.selectedIndex].text; }catch(e){}
+              // update title on change
+              s.addEventListener('change', (function(sel){ return function(){ try{ sel.title = sel.options[sel.selectedIndex].text; }catch(e){} }; })(s), false);
+              // expand width when focused (so user can see more when opening)
+              s.addEventListener('focus', (function(sel,pxv){ return function(){ try{ sel.style.width = 'auto'; }catch(e){} }; })(s,px), false);
+              // restore fixed width on blur
+              s.addEventListener('blur', (function(sel,pxv){ return function(){ try{ sel.style.width = pxv + 'px'; }catch(e){} }; })(s,px), false);
+            }
+          }catch(e){}
+        }
+    if(window.addEventListener) window.addEventListener('load', function(){ applyFixedWidth(500); }, false);
+    else window.attachEvent('onload', function(){ applyFixedWidth(500); });
+      })();
+    </script>
+
+    <div style="position:absolute; left:10px; top:420px; font-size:14px;">※機種リストへの追加や不具合は<a href="https://teams.microsoft.com/l/channel/19%3A4WJMGM-cVNNI2RMfELwXiqBYWW7Bp-kPgKKeltMmN6Y1%40thread.tacv2/%E4%B8%80%E8%88%AC?groupId=897ff081-4025-4086-905f-10fa61e1b528&tenantId=52d3f7c5-0ee1-45a4-9404-acd57e38f44f">管理者</a>までご連絡ください。</div>
     <div style="position:absolute; left:10px; top:445px; font-size:14px;"><u>登録手順</u></div>
     <div style="position:absolute; left:15px; top:465px; font-size:14px;">1) 日付で登録日を選択(初期値は本日)　※日付を変更することで過去入力データが表示されます</div>
     <div style="position:absolute; left:15px; top:485px; font-size:14px;">2) 午前,午後,残業時間それぞれで［機種］or［共通］業務を選択</div>
@@ -1743,7 +1829,7 @@ session_start();
       function registed_date_period()
       {
         var namecode = <?php echo $name_code; ?>;
-        window.open('Regist_data_period.php?code='+namecode);
+        window.open('Regist_data_period-test.php?code='+namecode);
       }
       function registed_date_model()
       {
@@ -2067,5 +2153,65 @@ session_start();
       options8[client_ot2].selected = true;
     </script>
     <!-- debug removed -->
+    <script>
+      // Hide account UI robustly, including elements added later via document.write or scripts.
+      (function(){
+        try{
+          function hideAccountElements(){
+            try{
+              for(var i=1;i<=8;i++){
+                var el = document.getElementById('clientlist'+i);
+                if(el) el.style.display = 'none';
+              }
+            }catch(_){ }
+
+            try{
+              var sels = document.getElementsByTagName('select');
+              for(var si=0; si<sels.length; si++){
+                var s = sels[si];
+                var id = s.id || '';
+                if(id.indexOf('clientlist') !== -1){ s.style.display='none'; }
+              }
+            }catch(_){ }
+
+            try{
+              var tags = ['label','div','span','p','td','th'];
+              for(var t=0;t<tags.length;t++){
+                var nodes = document.getElementsByTagName(tags[t]);
+                for(var n=0;n<nodes.length;n++){
+                  var node = nodes[n];
+                  var txt = '';
+                  try{ txt = (typeof node.innerText !== 'undefined') ? node.innerText : node.textContent; }catch(e){ txt = node.textContent || ''; }
+                  if(txt && txt.indexOf('アカウント')>-1){ node.style.display='none'; }
+                }
+              }
+            }catch(_){ }
+          }
+
+          // initial hide
+          hideAccountElements();
+
+          // observe DOM changes and hide newly added matching elements
+          var docRoot = document.documentElement || document.body;
+          if(docRoot && window.MutationObserver){
+            var observer = new MutationObserver(function(mutations){
+              for(var mi=0; mi<mutations.length; mi++){
+                var m = mutations[mi];
+                if(m.addedNodes && m.addedNodes.length>0){
+                  hideAccountElements();
+                }
+              }
+            });
+            observer.observe(docRoot, { childList:true, subtree:true });
+            // stop observing after 5 seconds to avoid perf impact
+            setTimeout(function(){ try{ observer.disconnect(); }catch(_){} }, 5000);
+          } else {
+            // fallback: try again after short delays
+            var tries = 0;
+            var tmr = setInterval(function(){ hideAccountElements(); tries++; if(tries>10) clearInterval(tmr); }, 200);
+          }
+        }catch(e){ try{ console.log('hide account UI error', e); }catch(_){ } }
+      })();
+    </script>
   </body>
 </html>
