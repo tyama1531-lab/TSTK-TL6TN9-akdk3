@@ -8,7 +8,7 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: 4f0c2b1
+      revision: v0.3.0
       import: app/west.yml
 
     - name: zmk-driver-paw3222-alpha3
