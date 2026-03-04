@@ -34,7 +34,7 @@
     /* [Row_2] */ &kp TAB    &none    &kp UP     &none      &kp PGUP   &none                           &none       &none        &none           &none        &none       &none     &none      &kp DELETE
     /* [Row_3] */ &kp LCTRL  &kp LEFT &kp DOWN   &kp RIGHT  &kp PGDN   &none                           &kp HOME    &kp END      &none           &none        &none       &none     &kp ENTER
     /* [Row_4] */ &kp LSHFT  &none    &kp X      &kp C      &kp V      &mo 4                           &none       &none        &none           &none        &none       &none     &kp F7
-    /* [Row_5] */ &kp LGUI   &kp LALT &kp CAPS   &kp SPACE  &kp DELETE &none              &none        &none       &none        &none           &none        &none
+    /* [Row_5] */ &kp CAPS   &kp LALT &kp LGUI   &kp SPACE  &kp DELETE &none              &none        &none       &none        &none           &none        &none
             >;
         };
 
