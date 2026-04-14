@@ -1,6 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/bt.h>
 
 / {
 /*
@@ -30,7 +31,7 @@
         layer_1 {
             bindings = <
     //            [Col_L1]   [Col_L2] [Col_L3]   [Col_L4]   [Col_L5]   [Col_L6]           [Col_R1]     [Col_R2]    [Col_R3]     [Col_R4]        [Col_R5]     [Col_R6]    [Col_R7]  [Col_R8]   [Col_R9]
-    /* [Row_1] */ &kp ESC    &kp F1   &kp F2     &kp F3     &kp F4     &kp F5                          &kp F6      &kp F7       &kp F8          &kp F9       &kp F10     &kp F11   &kp F12    &kp GRAVE
+    /* [Row_1] */ &kp ESC    &bt BT_SEL 0   &kp F2     &kp F3     &kp F4     &kp F5                          &kp F6      &kp F7       &kp F8          &kp F9       &kp F10     &kp F11   &kp F12    &kp GRAVE
     /* [Row_2] */ &kp TAB    &none    &kp UP     &none      &kp PGUP   &none                           &none       &none        &none           &none        &none       &none     &none      &kp DELETE
     /* [Row_3] */ &kp LCTRL  &kp LEFT &kp DOWN   &kp RIGHT  &kp PGDN   &none                           &kp HOME    &kp END      &none           &none        &none       &none     &kp ENTER
     /* [Row_4] */ &kp LSHFT  &none    &kp X      &kp C      &kp V      &mo 4                           &kp END     &none        &none           &none        &none       &none     &kp F7
