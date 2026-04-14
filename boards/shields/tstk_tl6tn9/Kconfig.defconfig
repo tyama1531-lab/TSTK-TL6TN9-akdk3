@@ -21,3 +21,25 @@ config ZMK_SPLIT
     default y
 
 endif
+
+if SHIELD_TSTK_TL6TN9_LEFT || SHIELD_TSTK_TL6TN9_RIGHT
+
+config ZMK_BLE
+    default y
+
+config BT
+    default y
+
+config BT_PERIPHERAL
+    default y
+
+config BT_CENTRAL
+    default y
+
+config BT_SMP
+    default y
+
+config BT_FIXED_PASSKEY
+    default n
+
+endif
